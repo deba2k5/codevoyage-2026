@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from './CyberNavbar.module.css';
 
-const NAV_LINKS = [
-  { href: '#hero', label: 'HERO' },
-  { href: '#character', label: 'HEROES' },
+const SECTION_LINKS = [
   { href: '#about', label: 'ABOUT' },
   { href: '#tracks', label: 'THEMES' },
   { href: '#timeline', label: 'TIMELINE' },
@@ -13,39 +12,65 @@ const NAV_LINKS = [
   { href: '#faq', label: 'FAQ' },
 ];
 
+const LAST_HERO_KEY = 'cv-last-hero';
+
 export default function CyberNavbar() {
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const router = useRouter();
+  const pathname = usePathname();
+  const onHeroPage = pathname?.startsWith('/hero/');
+
+  const goHome = () => {
+    router.push('/');
+  };
+
+  const goToSection = (hash: string) => {
+    if (onHeroPage) {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    const lastHero = typeof window !== 'undefined' ? sessionStorage.getItem(LAST_HERO_KEY) : null;
+    router.push(`/hero/${lastHero || 'spider-man'}${hash}`);
   };
 
   return (
     <header className={styles.header}>
       <a
-        href="#hero"
+        href="/"
         className={styles.logo}
         onClick={(e) => {
           e.preventDefault();
-          scrollTo('#hero');
+          goHome();
         }}
       >
         CODEVOYAGE
       </a>
 
       <nav className={styles.navLinks}>
-        {NAV_LINKS.map((link, i) => (
+        <a
+          href="/"
+          className={styles.navLink}
+          onClick={(e) => {
+            e.preventDefault();
+            goHome();
+          }}
+        >
+          HOME
+        </a>
+        <span className={styles.slash}>/</span>
+
+        {SECTION_LINKS.map((link, i) => (
           <React.Fragment key={link.href}>
             <a
               href={link.href}
               className={styles.navLink}
               onClick={(e) => {
                 e.preventDefault();
-                scrollTo(link.href);
+                goToSection(link.href);
               }}
             >
               {link.label}
             </a>
-            {i < NAV_LINKS.length - 1 && <span className={styles.slash}>/</span>}
+            {i < SECTION_LINKS.length - 1 && <span className={styles.slash}>/</span>}
           </React.Fragment>
         ))}
 
