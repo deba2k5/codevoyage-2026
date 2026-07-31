@@ -12,6 +12,7 @@ const themes = [
       "Learning is broken in a hundred small ways. Build platforms, tools, and experiences that make education work for every student, everywhere.",
     icon: GraduationCap,
     color: "#67e8f9",
+    color2: "#dc2626",
   },
   {
     number: "02",
@@ -21,6 +22,7 @@ const themes = [
       "Payments, lending, and banking still lock people out. Build the rails that make money move faster, safer, and fairer for everyone.",
     icon: Landmark,
     color: "#fde047",
+    color2: "#67e8f9",
   },
   {
     number: "03",
@@ -30,6 +32,7 @@ const themes = [
       "From fan engagement to athlete performance, sport runs on data now. Build the tools that give players and fans an edge.",
     icon: Trophy,
     color: "#dc2626",
+    color2: "#fde047",
   },
   {
     number: "04",
@@ -39,6 +42,7 @@ const themes = [
       "Healthcare is slow, expensive, and hard to access. Build diagnostics, care tools, and platforms that put people first.",
     icon: HeartPulse,
     color: "#34d399",
+    color2: "#67e8f9",
   },
   {
     number: "05",
@@ -48,6 +52,7 @@ const themes = [
       "Climate change won't wait. Build the clean energy, waste reduction, and conservation tech that buys us time.",
     icon: Leaf,
     color: "#67e8f9",
+    color2: "#34d399",
   },
 ]
 
@@ -70,33 +75,40 @@ export default function TracksSection() {
             <div
               key={theme.title}
               className="stackItem"
-              style={{ top: `${88 + index * 18}px`, zIndex: index + 1 }}
+              style={{ top: `${72 + index * 10}px`, zIndex: index + 1 }}
             >
               <motion.div
-                className="stackCard"
-                style={{ borderTopColor: theme.color }}
+                className="stackCardOuter"
+                style={{ background: `linear-gradient(135deg, ${theme.color}, ${theme.color2})` }}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="stackNumberCol">
-                  <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}55` }}>
-                    {theme.number}
-                  </span>
-                  <h3 className="stackTitle">{theme.title}</h3>
-                  <p className="stackTagline">{theme.tagline}</p>
-                </div>
-
-                <div className="stackVisual">
-                  <div className="stackIconGlow" style={{ background: `radial-gradient(circle, ${theme.color}33, transparent 70%)` }} />
-                  <div className="stackIconRing" style={{ borderColor: theme.color, color: theme.color }}>
-                    <IconComp size={56} strokeWidth={1.5} />
+                <div className="stackCard">
+                  <div className="stackHeader">
+                    <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+                      {theme.number}
+                    </span>
+                    <div className="stackHeaderText">
+                      <h3 className="stackTitle">{theme.title}</h3>
+                      <p className="stackTagline">{theme.tagline}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="stackTextCol">
-                  <p className="stackDesc">{theme.description}</p>
+                  <div className="stackBody">
+                    <div className="stackVisual">
+                      <div
+                        className="stackVisualGlow"
+                        style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
+                      />
+                      <IconComp size={100} strokeWidth={1} style={{ color: theme.color }} />
+                    </div>
+
+                    <div className="stackTextCol">
+                      <p className="stackDesc">{theme.description}</p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -111,108 +123,107 @@ export default function TracksSection() {
 
         .stackItem {
           position: sticky;
-          height: 62vh;
-          min-height: 420px;
+          height: 74vh;
+          min-height: 480px;
           display: flex;
           align-items: flex-start;
           padding-bottom: 6rem;
         }
 
         .stackItem:not(:last-child) {
-          margin-bottom: 8vh;
+          margin-bottom: 10vh;
+        }
+
+        .stackCardOuter {
+          width: 100%;
+          max-width: 1320px;
+          margin: 0 auto;
+          padding: 2px;
+          border-radius: 2.5rem;
+          box-shadow: 0 0 60px -20px rgba(0, 0, 0, 0.6);
         }
 
         .stackCard {
-          width: 100%;
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 2.5rem clamp(1.5rem, 5vw, 3.5rem);
-          border-radius: 1.5rem;
-          background: rgba(15, 17, 26, 0.92);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-top: 3px solid;
-          box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.7);
-          display: grid;
-          grid-template-columns: auto 1fr;
-          grid-template-rows: auto auto;
-          gap: 1rem 2.5rem;
-          align-items: center;
-        }
-
-        .stackNumberCol {
-          grid-column: 1;
-          grid-row: 1 / span 2;
+          height: 100%;
+          background: var(--background, #13141c);
+          border-radius: calc(2.5rem - 2px);
+          padding: clamp(1.75rem, 4vw, 3.5rem);
           display: flex;
           flex-direction: column;
-          gap: 0.25rem;
-          min-width: 180px;
+          gap: clamp(1.5rem, 4vw, 3rem);
+        }
+
+        .stackHeader {
+          display: flex;
+          align-items: baseline;
+          gap: 1.5rem;
         }
 
         .stackNumber {
           font-family: var(--font-heading);
-          font-size: 5rem;
+          font-size: clamp(3.5rem, 6vw, 5.5rem);
           line-height: 0.85;
           font-weight: 700;
           color: transparent;
-          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3);
+          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35);
+        }
+
+        .stackHeaderText {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
         }
 
         .stackTitle {
           font-family: var(--font-heading);
-          font-size: 2rem;
+          font-size: clamp(1.5rem, 3vw, 2.25rem);
           font-weight: 700;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.06em;
           color: white;
-          margin-top: 0.5rem;
         }
 
         .stackTagline {
           font-size: 1rem;
           color: rgba(255, 255, 255, 0.5);
-          margin-top: 0.15rem;
+        }
+
+        .stackBody {
+          flex: 1;
+          display: grid;
+          grid-template-columns: minmax(0, 45%) 1fr;
+          gap: clamp(1.5rem, 4vw, 3rem);
+          align-items: center;
         }
 
         .stackVisual {
-          grid-column: 2;
-          grid-row: 1;
           position: relative;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          height: 90px;
-        }
-
-        .stackIconGlow {
-          position: absolute;
-          inset: -40px;
-          border-radius: 9999px;
-          filter: blur(20px);
-        }
-
-        .stackIconRing {
-          position: relative;
-          width: 90px;
-          height: 90px;
-          border-radius: 9999px;
-          border: 2px solid;
+          height: 100%;
+          min-height: 220px;
+          border-radius: 1.25rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.03);
+          overflow: hidden;
+        }
+
+        .stackVisualGlow {
+          position: absolute;
+          inset: -20%;
+          filter: blur(30px);
         }
 
         .stackTextCol {
-          grid-column: 2;
-          grid-row: 2;
+          display: flex;
+          align-items: center;
         }
 
         .stackDesc {
-          font-size: 1.05rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.75);
-          max-width: 60ch;
+          font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.8);
+          max-width: 55ch;
         }
 
         @media (max-width: 768px) {
@@ -223,41 +234,24 @@ export default function TracksSection() {
           }
 
           .stackCard {
+            padding: 1.5rem;
+            gap: 1.25rem;
+          }
+
+          .stackBody {
             grid-template-columns: 1fr;
-            grid-template-rows: auto auto auto;
-            padding: 1.75rem;
-            gap: 1rem;
-          }
-
-          .stackNumberCol {
-            grid-column: 1;
-            grid-row: 1;
-            min-width: 0;
-          }
-
-          .stackNumber {
-            font-size: 3.25rem;
-          }
-
-          .stackTitle {
-            font-size: 1.5rem;
           }
 
           .stackVisual {
-            grid-column: 1;
-            grid-row: 2;
-            justify-content: flex-start;
-            height: 70px;
+            min-height: 160px;
           }
 
-          .stackIconRing {
-            width: 70px;
-            height: 70px;
+          .stackNumber {
+            font-size: 2.75rem;
           }
 
-          .stackTextCol {
-            grid-column: 1;
-            grid-row: 3;
+          .stackTitle {
+            font-size: 1.3rem;
           }
         }
       `}</style>
