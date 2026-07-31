@@ -179,18 +179,6 @@
   }
 }
 
-/* Professional Tech Background Elements */
-.bgGrid {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: center center;
-  z-index: 0;
-  pointer-events: none;
-}
 
 .glowRed {
   position: absolute;

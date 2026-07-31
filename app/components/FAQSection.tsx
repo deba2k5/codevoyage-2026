@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle } from 'lucide-react';
 import styles from './FAQSection.module.css';
 
@@ -59,9 +59,10 @@ const faqs = [
 ];
 
 export default function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section id="faq" className={styles.container}>
-      <div className={styles.bgGrid} />
       <div className={styles.glowRed} />
       <div className={styles.glowCyan} />
 
@@ -96,20 +97,42 @@ export default function FAQSection() {
           Everything you need to know before you register.
         </motion.p>
 
-        <div className={styles.faqGrid}>
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              className={styles.faqCard}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: (index % 4) * 0.05 }}
-            >
-              <h3 className={styles.faqQ}>{faq.question}</h3>
-              <p className={styles.faqA}>{faq.answer}</p>
-            </motion.div>
-          ))}
+        <div className={styles.faqList}>
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <motion.div
+                key={index}
+                className={styles.faqItem}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.4, delay: (index % 6) * 0.04 }}
+              >
+                <button
+                  className={styles.faqQ}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span>{faq.question}</span>
+                  <span className={`${styles.faqToggle} ${isOpen ? styles.faqToggleOpen : ''}`}>+</span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className={styles.faqAWrap}
+                    >
+                      <p className={styles.faqA}>{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

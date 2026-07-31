@@ -40,7 +40,6 @@ export default function AboutSection() {
 
   return (
     <section id="about" className={styles.container}>
-      <div className={styles.bgGrid} />
       <div className={styles.glowRed} />
       <div className={styles.glowCyan} />
 

@@ -28,6 +28,29 @@ export default function CharacterDetailSection({ character }: Props) {
     >
       <section className={styles.section}>
         <div className={styles.headerRow}>
+          <motion.div
+            className={styles.characterImageWrapper}
+            key={`image-${character.id}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            style={{
+              border: `2px solid ${character.themeColor}88`,
+              boxShadow: `0 20px 50px rgba(0,0,0,0.8), 0 0 30px ${character.themeColor}44`,
+            }}
+          >
+            {character.image ? (
+              <img
+                src={character.image}
+                alt={character.imageAlt}
+                className={styles.characterImage}
+              />
+            ) : (
+              <div className={styles.characterImageFallback}>{character.name}</div>
+            )}
+          </motion.div>
+
           <motion.h2
             className={styles.characterName}
             key={`name-${character.id}`}
@@ -35,6 +58,7 @@ export default function CharacterDetailSection({ character }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            style={{ color: character.themeColor }}
           >
             {character.name}
           </motion.h2>

@@ -79,7 +79,6 @@ export default function TimelineSection() {
 
   return (
     <section id="timeline" className={styles.container}>
-      <div className={styles.bgGrid} />
       <div className={styles.glowRed} />
       <div className={styles.glowCyan} />
       <div className={styles.glowYellow} />

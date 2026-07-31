@@ -7,7 +7,6 @@ export default function SiteFooter() {
   const contacts = [
     { name: "Sreyasi Mondal", phone: "9883177160" },
     { name: "Debangkita Saha", phone: "8777494652" },
-    { name: "Debangshu Chatterjee", phone: "6290277345" },
   ]
 
   return (

@@ -127,6 +127,38 @@
   margin-bottom: 1rem;
 }
 
+.characterImageWrapper {
+  width: 240px;
+  height: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem;
+  background: #161926;
+}
+
+.characterImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.characterImageFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: white;
+  background: var(--theme-color);
+}
+
 .characterName {
   font-family: var(--font-heading);
   font-size: 3rem;
