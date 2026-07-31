@@ -36,14 +36,12 @@
 }
 
 .title {
-  font-family: var(--font-heading);
-  font-size: 5rem;
-  font-weight: 700;
-  font-style: italic;
+  font-size: 4.5rem;
+  font-weight: 800;
   line-height: 0.9;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8), 0 0 30px rgba(220, 38, 38, 0.5);
   color: var(--primary);
 }
@@ -57,65 +55,34 @@
   line-height: 1.6;
 }
 
-/* ---------- Timeline ---------- */
+/* ---------- Winding Timeline Path ---------- */
 
-.timelineWrap {
+.pathWrap {
   position: relative;
-  padding: 2rem 0 1rem;
+  width: 100%;
 }
 
-.timelineWrap::before {
-  content: "";
+.pathSvg {
   position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    rgba(220, 38, 38, 0) 0%,
-    var(--primary) 6%,
-    var(--accent-yellow) 50%,
-    var(--primary) 94%,
-    rgba(220, 38, 38, 0) 100%
-  );
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.35);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
+  overflow: visible;
 }
 
-.timelineRow {
+.pathItem {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 72px 1fr;
-  align-items: center;
-  gap: 0;
-  margin-bottom: 3rem;
 }
 
-.timelineRow:last-child {
-  margin-bottom: 0;
-}
-
-.timelineSlotLeft {
-  grid-column: 1;
-  justify-self: end;
-  width: 100%;
-}
-
-.timelineSlotRight {
-  grid-column: 3;
-  justify-self: start;
-  width: 100%;
-}
-
-.timelineDot {
-  grid-column: 2;
-  position: relative;
+.pathNode {
+  position: absolute;
+  top: 50%;
+  margin-top: -26px;
+  margin-left: -26px;
   z-index: 2;
-  justify-self: center;
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 9999px;
   display: flex;
   align-items: center;
@@ -124,80 +91,57 @@
   border: 2px solid var(--accent-yellow);
   color: white;
   box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.12), 0 8px 20px -6px rgba(220, 38, 38, 0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
-.timelineDot::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 9999px;
-  border: 1px solid rgba(253, 224, 71, 0.4);
-  animation: pulse-ring 2.4s ease-out infinite;
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.8;
-  }
-  80% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
-}
-
-.stepNumber {
-  position: absolute;
-  top: -1.6rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--accent-yellow);
-  opacity: 0.8;
-  white-space: nowrap;
-}
-
-.timelineRow:hover .timelineDot {
-  transform: scale(1.08);
+.pathNode:hover {
   box-shadow: 0 0 0 8px rgba(220, 38, 38, 0.2), 0 10px 28px -6px rgba(220, 38, 38, 0.8);
 }
 
-.timelineCard {
-  background: rgba(15, 17, 26, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 1.75rem;
-  border-radius: 14px;
+.pathCard {
+  position: absolute;
+  top: 50%;
+  margin-top: -58px;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+  width: 42%;
+}
+
+.pathCardLeft {
+  left: 0;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.pathCardRight {
+  right: 0;
+  flex-direction: row;
+  text-align: left;
+}
+
+.pathNumber {
+  flex-shrink: 0;
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+}
+
+.pathCardBody {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: 400px;
-  transition: all 0.3s;
+  gap: 0.4rem;
+  min-width: 0;
 }
 
-.timelineSlotLeft .timelineCard {
-  margin-left: auto;
-}
-
-.timelineCard:hover {
-  border-color: var(--primary);
-  background: rgba(22, 25, 38, 0.9);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 45px -20px rgba(220, 38, 38, 0.55);
+.pathCardLeft .pathCardBody {
+  align-items: flex-end;
 }
 
 .timelineTime {
   align-self: flex-start;
-  font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -208,54 +152,90 @@
   border-radius: 9999px;
 }
 
+.pathCardLeft .timelineTime {
+  align-self: flex-end;
+}
+
 .timelineTitle {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: white;
   text-transform: uppercase;
+  line-height: 1.25;
 }
 
 .timelineDesc {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #94a3b8;
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {
-  .timelineWrap::before {
-    left: 27px;
+  .pathSvg {
+    display: none;
   }
 
-  .timelineRow {
-    grid-template-columns: 54px 1fr;
-    margin-bottom: 2rem;
+  .pathWrap {
+    padding-left: 66px;
   }
 
-  .timelineDot {
-    grid-column: 1;
-    justify-self: start;
-    width: 44px;
-    height: 44px;
+  .pathItem {
+    height: auto !important;
+    margin-bottom: 0;
   }
 
-  .stepNumber {
-    left: 22px;
-    transform: none;
+  .pathWrap::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+      180deg,
+      rgba(220, 38, 38, 0) 0%,
+      var(--primary) 6%,
+      var(--accent-yellow) 50%,
+      var(--primary) 94%,
+      rgba(220, 38, 38, 0) 100%
+    );
   }
 
-  .timelineSlotLeft,
-  .timelineSlotRight {
-    grid-column: 2;
-    justify-self: start;
+  .pathNode {
+    position: absolute !important;
+    left: -66px !important;
+    top: 4px !important;
+    margin: 0 !important;
+    width: 42px;
+    height: 42px;
   }
 
-  .timelineSlotLeft .timelineCard,
-  .timelineSlotRight .timelineCard {
-    margin-left: 0;
-    max-width: 100%;
+  .pathCard {
+    position: static !important;
+    margin-top: 0 !important;
+    width: 100%;
+    flex-direction: row !important;
+    text-align: left !important;
+    margin-bottom: 2.5rem;
+  }
+
+  .pathCard:last-child {
+    margin-bottom: 0;
+  }
+
+  .pathCardBody,
+  .pathCardLeft .pathCardBody {
+    align-items: flex-start !important;
+  }
+
+  .pathCardLeft .timelineTime {
+    align-self: flex-start !important;
+  }
+
+  .pathNumber {
+    font-size: 2.75rem;
   }
 }
 

@@ -2,9 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { JetBrains_Mono } from 'next/font/google';
 import { Clock, Users, Trophy, Coffee, MapPin } from 'lucide-react';
 import CyberNavbar from '../components/CyberNavbar';
 import styles from './Timeline.module.css';
+
+const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['500', '700', '800'] });
+
+const ROW_HEIGHT = 260;
 
 export default function TimelinePage() {
   const schedule = [
@@ -58,6 +63,21 @@ export default function TimelinePage() {
     },
   ];
 
+  const totalHeight = schedule.length * ROW_HEIGHT;
+
+  const nodeXs = schedule.map((_, i) => (i % 2 === 0 ? 64 : 36));
+
+  const pathD = nodeXs
+    .map((x, i) => {
+      const y = i * ROW_HEIGHT + ROW_HEIGHT / 2;
+      if (i === 0) return `M ${x} ${y}`;
+      const prevX = nodeXs[i - 1];
+      const prevY = (i - 1) * ROW_HEIGHT + ROW_HEIGHT / 2;
+      const midY = (prevY + y) / 2;
+      return `C ${prevX} ${midY}, ${x} ${midY}, ${x} ${y}`;
+    })
+    .join(' ');
+
   return (
     <div className={styles.container}>
       <div className={styles.bgGrid} />
@@ -78,12 +98,12 @@ export default function TimelinePage() {
         </motion.div>
 
         <motion.h1
-          className={styles.title}
-          initial={{ opacity: 0, x: -50, skewX: 10 }}
-          animate={{ opacity: 1, x: 0, skewX: 0 }}
+          className={`${styles.title} ${mono.className}`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, type: 'spring' }}
         >
-          Timeline
+          TIMELINE
         </motion.h1>
 
         <motion.p
@@ -95,42 +115,64 @@ export default function TimelinePage() {
           The complete 8-hour hackathon schedule, from check-in to closing ceremony.
         </motion.p>
 
-        <div className={styles.timelineWrap}>
+        <div className={styles.pathWrap}>
+          <svg
+            className={styles.pathSvg}
+            viewBox={`0 0 100 ${totalHeight}`}
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="timelinePathGradient" x1="0" y1="0" x2="0" y2={totalHeight} gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#dc2626" />
+                <stop offset="50%" stopColor="#fde047" />
+                <stop offset="100%" stopColor="#67e8f9" />
+              </linearGradient>
+            </defs>
+            <path
+              d={pathD}
+              fill="none"
+              stroke="url(#timelinePathGradient)"
+              strokeWidth="0.6"
+              strokeDasharray="2.4 2"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+
           {schedule.map((item, index) => {
             const IconComp = item.icon;
-            const isLeft = index % 2 === 0;
-            const card = (
-              <div className={styles.timelineCard}>
-                <span className={styles.timelineTime}>{item.time}</span>
-                <h3 className={styles.timelineTitle}>{item.title}</h3>
-                <p className={styles.timelineDesc}>{item.description}</p>
-              </div>
-            );
+            const x = nodeXs[index];
+            const isRightNode = x > 50;
+
             return (
-              <div key={index} className={styles.timelineRow}>
+              <div key={index} className={styles.pathItem} style={{ height: ROW_HEIGHT }}>
                 <motion.div
-                  className={styles.timelineSlotLeft}
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  className={styles.pathNode}
+                  style={{ left: `${x}%` }}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
-                  {isLeft ? card : null}
+                  <IconComp size={20} />
                 </motion.div>
 
-                <div className={styles.timelineDot}>
-                  <span className={styles.stepNumber}>{String(index + 1).padStart(2, '0')}</span>
-                  <IconComp size={22} />
-                </div>
-
                 <motion.div
-                  className={styles.timelineSlotRight}
-                  initial={{ opacity: 0, x: 40 }}
+                  className={`${styles.pathCard} ${isRightNode ? styles.pathCardLeft : styles.pathCardRight}`}
+                  initial={{ opacity: 0, x: isRightNode ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  transition={{ duration: 0.45, delay: index * 0.06 }}
                 >
-                  {isLeft ? null : card}
+                  <span className={`${styles.pathNumber} ${mono.className}`}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className={styles.pathCardBody}>
+                    <span className={`${styles.timelineTime} ${mono.className}`}>{item.time}</span>
+                    <h3 className={`${styles.timelineTitle} ${mono.className}`}>{item.title}</h3>
+                    <p className={styles.timelineDesc}>{item.description}</p>
+                  </div>
                 </motion.div>
               </div>
             );
