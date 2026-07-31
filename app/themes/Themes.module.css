@@ -1,0 +1,65 @@
+.container {
+  min-height: 100vh;
+  background: #13141c; /* Deep, clean, professional dark slate */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Professional Tech Background Elements */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glowRed {
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.18) 0%, rgba(220, 38, 38, 0.05) 50%, transparent 70%);
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glowCyan {
+  position: absolute;
+  bottom: 5%;
+  left: -150px;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(103, 232, 249, 0.12) 0%, rgba(103, 232, 249, 0.03) 50%, transparent 70%);
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glowYellow {
+  position: absolute;
+  top: 40%;
+  right: 15%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(253, 224, 71, 0.08) 0%, rgba(253, 224, 71, 0.02) 50%, transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}

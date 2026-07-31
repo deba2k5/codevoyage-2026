@@ -10,7 +10,7 @@ export default function CyberNavbar() {
   const router = useRouter();
 
   const handleSignUp = () => {
-    router.push('/events');
+    router.push('/event');
   };
 
   return (
@@ -26,7 +26,7 @@ export default function CyberNavbar() {
         <span className={styles.slash}>/</span>
         <Link href="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.activeLink : ''}`}>ABOUT US</Link>
         <span className={styles.slash}>/</span>
-        <Link href="/events" className={`${styles.navLink} ${pathname === '/events' ? styles.activeLink : ''}`}>EVENT</Link>
+        <Link href="/themes" className={`${styles.navLink} ${pathname === '/themes' ? styles.activeLink : ''}`}>THEMES</Link>
         <span className={styles.slash}>/</span>
         <Link href="/shield" className={`${styles.navLink} ${pathname === '/shield' ? styles.activeLink : ''}`}>S.H.I.E.L.D.</Link>
         

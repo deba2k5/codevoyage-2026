@@ -32,7 +32,7 @@ export default function Home() {
     : characters[activeCharacterIndex];
 
   const handleEnterInitiative = () => {
-    router.push('/events');
+    router.push('/event');
   };
 
   return (

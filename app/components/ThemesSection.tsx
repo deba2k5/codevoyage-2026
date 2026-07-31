@@ -56,7 +56,7 @@ const themes = [
   },
 ]
 
-export default function TracksSection() {
+export default function ThemesSection() {
   return (
     <section id="tracks" className="relative py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,29 +86,18 @@ export default function TracksSection() {
                 transition={{ duration: 0.5 }}
               >
                 <div className="stackCard">
-                  <div className="stackHeader">
-                    <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
-                      {theme.number}
-                    </span>
-                    <div className="stackHeaderText">
-                      <h3 className="stackTitle">{theme.title}</h3>
-                      <p className="stackTagline">{theme.tagline}</p>
-                    </div>
-                  </div>
+                  <div
+                    className="stackIconGlow"
+                    style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
+                  />
+                  <IconComp size={64} strokeWidth={1} style={{ color: theme.color }} className="stackIcon" />
 
-                  <div className="stackBody">
-                    <div className="stackVisual">
-                      <div
-                        className="stackVisualGlow"
-                        style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
-                      />
-                      <IconComp size={100} strokeWidth={1} style={{ color: theme.color }} />
-                    </div>
-
-                    <div className="stackTextCol">
-                      <p className="stackDesc">{theme.description}</p>
-                    </div>
-                  </div>
+                  <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+                    {theme.number}
+                  </span>
+                  <h3 className="stackTitle">{theme.title}</h3>
+                  <p className="stackTagline">{theme.tagline}</p>
+                  <p className="stackDesc">{theme.description}</p>
                 </div>
               </motion.div>
             </div>
@@ -127,6 +116,7 @@ export default function TracksSection() {
           min-height: 480px;
           display: flex;
           align-items: flex-start;
+          justify-content: center;
           padding-bottom: 6rem;
         }
 
@@ -136,7 +126,7 @@ export default function TracksSection() {
 
         .stackCardOuter {
           width: 100%;
-          max-width: 1320px;
+          max-width: 900px;
           margin: 0 auto;
           padding: 2px;
           border-radius: 2.5rem;
@@ -144,22 +134,38 @@ export default function TracksSection() {
         }
 
         .stackCard {
+          position: relative;
           height: 100%;
-          background: var(--background, #13141c);
+          background: #000;
           border-radius: calc(2.5rem - 2px);
-          padding: clamp(1.75rem, 4vw, 3.5rem);
+          padding: clamp(2rem, 5vw, 4rem);
           display: flex;
           flex-direction: column;
-          gap: clamp(1.5rem, 4vw, 3rem);
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          gap: 0.75rem;
+          overflow: hidden;
         }
 
-        .stackHeader {
-          display: flex;
-          align-items: baseline;
-          gap: 1.5rem;
+        .stackIconGlow {
+          position: absolute;
+          top: -10%;
+          left: 50%;
+          width: 60%;
+          height: 60%;
+          transform: translateX(-50%);
+          filter: blur(40px);
+          pointer-events: none;
+        }
+
+        .stackIcon {
+          position: relative;
+          margin-bottom: 0.5rem;
         }
 
         .stackNumber {
+          position: relative;
           font-family: var(--font-heading);
           font-size: clamp(3.5rem, 6vw, 5.5rem);
           line-height: 0.85;
@@ -168,13 +174,8 @@ export default function TracksSection() {
           -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35);
         }
 
-        .stackHeaderText {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-        }
-
         .stackTitle {
+          position: relative;
           font-family: var(--font-heading);
           font-size: clamp(1.5rem, 3vw, 2.25rem);
           font-weight: 700;
@@ -183,44 +184,15 @@ export default function TracksSection() {
         }
 
         .stackTagline {
+          position: relative;
           font-size: 1rem;
           color: rgba(255, 255, 255, 0.5);
-        }
-
-        .stackBody {
-          flex: 1;
-          display: grid;
-          grid-template-columns: minmax(0, 45%) 1fr;
-          gap: clamp(1.5rem, 4vw, 3rem);
-          align-items: center;
-        }
-
-        .stackVisual {
-          position: relative;
-          height: 100%;
-          min-height: 220px;
-          border-radius: 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        .stackVisualGlow {
-          position: absolute;
-          inset: -20%;
-          filter: blur(30px);
-        }
-
-        .stackTextCol {
-          display: flex;
-          align-items: center;
+          margin-bottom: 0.5rem;
         }
 
         .stackDesc {
-          font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+          position: relative;
+          font-size: clamp(1.05rem, 1.6vw, 1.25rem);
           line-height: 1.55;
           color: rgba(255, 255, 255, 0.8);
           max-width: 55ch;
@@ -234,16 +206,8 @@ export default function TracksSection() {
           }
 
           .stackCard {
-            padding: 1.5rem;
-            gap: 1.25rem;
-          }
-
-          .stackBody {
-            grid-template-columns: 1fr;
-          }
-
-          .stackVisual {
-            min-height: 160px;
+            padding: 1.75rem;
+            gap: 0.6rem;
           }
 
           .stackNumber {
