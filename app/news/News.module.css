@@ -124,46 +124,62 @@
   margin: 0;
 }
 
-.roadmapWrap {
+.timelineWrap {
   position: relative;
-  max-width: 1100px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 0;
 }
 
-.roadmapSwiper {
-  padding-top: 2.5rem;
-  padding-bottom: 3.5rem !important;
-  overflow: visible;
-}
-
-.roadmapSwiper::before {
+.timelineWrap::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(2.5rem + 24px);
-  height: 2px;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  transform: translateX(-50%);
   background: linear-gradient(
-    90deg,
+    180deg,
     rgba(220, 38, 38, 0.05),
-    var(--primary) 15%,
+    var(--primary) 8%,
     var(--accent-yellow) 50%,
-    var(--primary) 85%,
+    var(--primary) 92%,
     rgba(220, 38, 38, 0.05)
   );
   z-index: 0;
 }
 
-.roadmapNode {
+.timelineRow {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
   align-items: center;
-  height: 100%;
+  gap: 0;
+  margin-bottom: 2.5rem;
 }
 
-.nodeDot {
+.timelineRow:last-child {
+  margin-bottom: 0;
+}
+
+.timelineSlotLeft {
+  grid-column: 1;
+  justify-self: end;
+  width: 100%;
+}
+
+.timelineSlotRight {
+  grid-column: 3;
+  justify-self: start;
+  width: 100%;
+}
+
+.timelineDot {
+  grid-column: 2;
   position: relative;
   z-index: 2;
+  justify-self: center;
   width: 48px;
   height: 48px;
   border-radius: 9999px;
@@ -177,37 +193,33 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stepIndex {
-  position: absolute;
-  top: 0;
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--accent-yellow);
-  opacity: 0.85;
+.timelineRow:hover .timelineDot {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 8px rgba(220, 38, 38, 0.18), 0 10px 26px -6px rgba(220, 38, 38, 0.75);
 }
 
 .timelineCard {
-  margin-top: 20px;
-  width: 100%;
-  flex: 1;
   background: rgba(15, 17, 26, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.25rem 1.5rem 1.5rem;
+  padding: 1.25rem 1.5rem;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  max-width: 380px;
   transition: all 0.3s;
+}
+
+.timelineSlotLeft .timelineCard {
+  margin-left: auto;
 }
 
 .timelineCard:hover {
   border-color: var(--primary);
   background: rgba(22, 25, 38, 0.9);
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: 0 20px 45px -20px rgba(220, 38, 38, 0.55);
 }
 
@@ -240,36 +252,34 @@
   line-height: 1.4;
 }
 
-.roadmapSwiper :global(.swiper-button-next),
-.roadmapSwiper :global(.swiper-button-prev) {
-  color: white !important;
-  background: rgba(0, 0, 0, 0.55);
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  top: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-}
-.roadmapSwiper :global(.swiper-button-next):hover,
-.roadmapSwiper :global(.swiper-button-prev):hover {
-  background: linear-gradient(90deg, var(--primary), #b91c1c);
-  box-shadow: 0 12px 28px -12px rgba(220, 38, 38, 0.6);
-  transform: translateY(-2px);
-}
-.roadmapSwiper :global(.swiper-button-next):after,
-.roadmapSwiper :global(.swiper-button-prev):after {
-  font-size: 15px !important;
-}
-.roadmapSwiper :global(.swiper-button-disabled) {
-  opacity: 0.25 !important;
-}
-.roadmapSwiper :global(.swiper-pagination-bullet) {
-  background: rgba(255, 255, 255, 0.4);
-  opacity: 1;
-}
-.roadmapSwiper :global(.swiper-pagination-bullet-active) {
-  background: linear-gradient(90deg, var(--primary), var(--accent-yellow));
+@media (max-width: 768px) {
+  .timelineWrap::before {
+    left: 24px;
+  }
+
+  .timelineRow {
+    grid-template-columns: 48px 1fr;
+    margin-bottom: 1.75rem;
+  }
+
+  .timelineDot {
+    grid-column: 1;
+    justify-self: start;
+    width: 40px;
+    height: 40px;
+  }
+
+  .timelineSlotLeft,
+  .timelineSlotRight {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .timelineSlotLeft .timelineCard,
+  .timelineSlotRight .timelineCard {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
 /* Professional Tech Background Elements */

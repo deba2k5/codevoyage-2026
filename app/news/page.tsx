@@ -3,11 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Clock, Users, Trophy, Coffee, Bell, Calendar } from 'lucide-react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import CyberNavbar from '../components/CyberNavbar';
 import styles from './News.module.css';
 
@@ -144,47 +139,45 @@ export default function NewsPage() {
           <h2 className={styles.sectionHeader} style={{ color: 'var(--primary)' }}>
             <Calendar size={32} /> Event Schedule
           </h2>
-          <div className={styles.roadmapWrap}>
-            <Swiper
-              modules={[Navigation, Pagination, Mousewheel]}
-              slidesPerView={1.15}
-              spaceBetween={20}
-              navigation
-              pagination={{ clickable: true }}
-              mousewheel={{ forceToAxis: true }}
-              grabCursor
-              breakpoints={{
-                640: { slidesPerView: 2.2, spaceBetween: 24 },
-                1024: { slidesPerView: 3.4, spaceBetween: 28 },
-              }}
-              className={styles.roadmapSwiper}
-            >
-              {schedule.map((item, index) => {
-                const IconComp = item.icon;
-                return (
-                  <SwiperSlide key={index} style={{ height: 'auto' }}>
-                    <motion.div
-                      className={styles.roadmapNode}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{ duration: 0.4, delay: (index % 4) * 0.08 }}
-                    >
-                      <div className={styles.nodeDot}>
-                        <IconComp size={20} />
-                      </div>
-                      <div className={styles.stepIndex}>{String(index + 1).padStart(2, '0')}</div>
+          <div className={styles.timelineWrap}>
+            {schedule.map((item, index) => {
+              const IconComp = item.icon;
+              const isLeft = index % 2 === 0;
+              const card = (
+                <div className={styles.timelineCard}>
+                  <span className={styles.timelineTime}>{item.time}</span>
+                  <h3 className={styles.timelineTitle}>{item.title}</h3>
+                  <p className={styles.timelineDesc}>{item.description}</p>
+                </div>
+              );
+              return (
+                <div key={index} className={styles.timelineRow}>
+                  <motion.div
+                    className={styles.timelineSlotLeft}
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                  >
+                    {isLeft ? card : null}
+                  </motion.div>
 
-                      <div className={styles.timelineCard}>
-                        <span className={styles.timelineTime}>{item.time}</span>
-                        <h3 className={styles.timelineTitle}>{item.title}</h3>
-                        <p className={styles.timelineDesc}>{item.description}</p>
-                      </div>
-                    </motion.div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+                  <div className={styles.timelineDot}>
+                    <IconComp size={20} />
+                  </div>
+
+                  <motion.div
+                    className={styles.timelineSlotRight}
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                  >
+                    {isLeft ? null : card}
+                  </motion.div>
+                </div>
+              );
+            })}
           </div>
         </section>
       </main>
