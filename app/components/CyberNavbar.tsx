@@ -20,7 +20,7 @@ export default function CyberNavbar() {
       <nav className={styles.navLinks}>
         <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.activeLink : ''}`}>HERO</Link>
         <span className={styles.slash}>/</span>
-        <Link href="/news" className={`${styles.navLink} ${pathname === '/news' ? styles.activeLink : ''}`}>NEWS</Link>
+        <Link href="/timeline" className={`${styles.navLink} ${pathname === '/timeline' ? styles.activeLink : ''}`}>TIMELINE</Link>
         <span className={styles.slash}>/</span>
         <Link href="/contact" className={`${styles.navLink} ${pathname === '/contact' ? styles.activeLink : ''}`}>CONTACT</Link>
         <span className={styles.slash}>/</span>
