@@ -2,13 +2,34 @@
 
 @layer base {
   :root {
-    --background: #1a1b26; /* Deep dark slate/navy */
+    --background: #13141c; /* Deep dark slate - single canonical background for the whole site */
     --foreground: #ffffff;
 
     --primary: #dc2626; /* Hero Red */
     --accent-yellow: #fde047; /* Neon Yellow */
     --accent-cyan: #67e8f9; /* Cyan / Lightning */
-    --card-bg: #222534;
+    --card-bg: #1c1d29;
+
+    /* Aliases so every Tailwind utility (bg-card, bg-secondary, border-border, etc.)
+       resolves to the exact same palette above, everywhere, with no wrapper class needed. */
+    --cv-background: var(--background);
+    --cv-foreground: var(--foreground);
+    --cv-card: var(--card-bg);
+    --cv-card-foreground: var(--foreground);
+    --cv-popover: var(--card-bg);
+    --cv-popover-foreground: var(--foreground);
+    --cv-primary: var(--primary);
+    --cv-primary-foreground: #ffffff;
+    --cv-secondary: #1c1d29;
+    --cv-secondary-foreground: var(--foreground);
+    --cv-muted: #1c1d29;
+    --cv-muted-foreground: #94a3b8;
+    --cv-accent: var(--accent-cyan);
+    --cv-accent-foreground: var(--background);
+    --cv-destructive: #ef4444;
+    --cv-border: rgba(220, 38, 38, 0.3);
+    --cv-input: rgba(220, 38, 38, 0.3);
+    --cv-ring: var(--primary);
   }
 
   * {
@@ -38,36 +59,6 @@
     cursor: pointer;
     font-family: inherit;
   }
-}
-
-/* ---------------------------------------------------------------- */
-/* Code Voyage event page theme (scoped to .cv-event so it never    */
-/* touches the Avengers homepage's own CSS variables above).        */
-/* Marvel palette: Hero Red / Neon Yellow / Cyan, matching the       */
-/* homepage's --primary / --accent-yellow / --accent-cyan.          */
-/* ---------------------------------------------------------------- */
-.cv-event {
-  --cv-background: #0a0a0f;
-  --cv-foreground: #f5f4ff;
-  --cv-card: #1a1414;
-  --cv-card-foreground: #f5f4ff;
-  --cv-popover: #1a1414;
-  --cv-popover-foreground: #f5f4ff;
-  --cv-primary: #dc2626;
-  --cv-primary-foreground: #ffffff;
-  --cv-secondary: #1f1717;
-  --cv-secondary-foreground: #f5f4ff;
-  --cv-muted: #1f1717;
-  --cv-muted-foreground: #b8b3c0;
-  --cv-accent: #67e8f9;
-  --cv-accent-foreground: #0a0a0f;
-  --cv-destructive: #ef4444;
-  --cv-border: rgba(220, 38, 38, 0.3);
-  --cv-input: rgba(220, 38, 38, 0.3);
-  --cv-ring: #dc2626;
-
-  background-color: var(--cv-background);
-  color: var(--cv-foreground);
 }
 
 @theme inline {
@@ -104,7 +95,7 @@
   .animate-accordion-down { animation: accordion-down 0.2s ease-out; }
   .animate-accordion-up { animation: accordion-up 0.2s ease-out; }
 
-  .cv-event .text-gradient {
+  .text-gradient {
     background: linear-gradient(90deg, #dc2626, #fde047, #67e8f9);
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -113,34 +104,34 @@
     animation: cv-gradient-shift 6s ease-in-out infinite;
   }
 
-  .cv-event .cyber-text {
+  .cyber-text {
     background: linear-gradient(90deg, #dc2626, #fde047);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .cv-event .cyber-heading {
+  .cyber-heading {
     background: linear-gradient(90deg, #dc2626, #fde047, #67e8f9);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .cv-event .cyber-card {
+  .cyber-card {
     background: rgba(26, 20, 20, 0.6);
     border: 1px solid var(--cv-border);
     border-radius: 0.75rem;
     backdrop-filter: blur(8px);
   }
 
-  .cv-event .glow-text {
+  .glow-text {
     text-shadow: 0 0 12px rgba(220, 38, 38, 0.85), 0 0 24px rgba(220, 38, 38, 0.5);
   }
-  .cv-event .glow-text-purple {
+  .glow-text-purple {
     text-shadow: 0 0 12px rgba(220, 38, 38, 0.9), 0 0 24px rgba(153, 27, 27, 0.6);
   }
-  .cv-event .glow-text-pink {
+  .glow-text-pink {
     text-shadow: 0 0 12px rgba(253, 224, 71, 0.85), 0 0 24px rgba(253, 224, 71, 0.5);
   }
 }

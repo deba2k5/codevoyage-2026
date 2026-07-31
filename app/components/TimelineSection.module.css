@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #13141c;
+  background: var(--background);
   color: white;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,13 @@
   width: 100%;
   position: relative;
   z-index: 10;
+  text-align: center;
+}
+
+.mainContent > .badge,
+.mainContent > .subtitle {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .badge {

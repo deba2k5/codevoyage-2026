@@ -1,7 +1,11 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
+import { motion } from "framer-motion"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, Autoplay } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 import { GraduationCap, Landmark, Trophy, HeartPulse, Leaf, LucideIcon } from "lucide-react"
 import styles from "./ThemesSection.module.css"
 
@@ -68,87 +72,71 @@ const themes: Theme[] = [
   },
 ]
 
-function ThemeCard({
-  theme,
-  index,
-  total,
-  progress,
-}: {
-  theme: Theme
-  index: number
-  total: number
-  progress: MotionValue<number>
-}) {
-  const targetScale = Math.max(0.85, 1 - (total - 1 - index) * 0.045)
-  const scale = useTransform(progress, [index / total, 1], [1, targetScale])
-  const IconComp = theme.icon
-
-  return (
-    <div className={styles.cardSticky} style={{ top: `${96 + index * 44}px`, zIndex: index + 1 }}>
-      <motion.div className={styles.cardOuter} style={{ scale, willChange: "transform" }}>
-        <div
-          className={styles.borderSpin}
-          style={
-            {
-              "--c1": theme.color,
-              "--c2": theme.color2,
-            } as React.CSSProperties
-          }
-        />
-        <div className={styles.cardInner}>
-          {index === 0 && (
-            <div className={styles.sectionHeading}>
-              <h2 className={styles.sectionTitle}>Themes</h2>
-              <p className={styles.sectionSub}>Five domains. Pick your battlefield.</p>
-            </div>
-          )}
-
-          <div className={styles.cardHeader}>
-            <span className={styles.cardNumber} style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
-              {theme.number}
-            </span>
-            <div className={styles.cardHeaderText}>
-              <h3 className={styles.cardTitle}>{theme.title}</h3>
-              <p className={styles.cardTagline}>{theme.tagline}</p>
-            </div>
-          </div>
-
-          <div className={styles.cardBody}>
-            <div className={styles.cardVisual}>
-              <div
-                className={styles.cardVisualGlow}
-                style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
-              />
-              <IconComp size={110} strokeWidth={1} style={{ color: theme.color }} />
-            </div>
-
-            <div className={styles.cardTextCol}>
-              <p className={styles.cardDesc}>{theme.description}</p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  )
-}
-
 export default function ThemesSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  })
-
   return (
-    <section
-      id="tracks"
-      ref={containerRef}
-      className={styles.stackSection}
-      style={{ height: `${themes.length * 100}vh` }}
-    >
-      {themes.map((theme, index) => (
-        <ThemeCard key={theme.title} theme={theme} index={index} total={themes.length} progress={scrollYProgress} />
-      ))}
+    <section id="tracks" className={styles.themesSection}>
+      <div className={styles.header}>
+        <motion.h2
+          className={styles.heading}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Themes
+        </motion.h2>
+        <p className={styles.subheading}>Five domains. Pick your battlefield.</p>
+      </div>
+
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 4000, disableOnInteraction: true }}
+        loop
+        centeredSlides
+        slidesPerView={1.15}
+        spaceBetween={24}
+        breakpoints={{
+          768: { slidesPerView: 1.6, spaceBetween: 32 },
+          1100: { slidesPerView: 2.2, spaceBetween: 40 },
+        }}
+        className={styles.swiper}
+      >
+        {themes.map((theme) => {
+          const IconComp = theme.icon
+          return (
+            <SwiperSlide key={theme.title} className={styles.slide}>
+              <div
+                className={styles.cardOuter}
+                style={{ background: `linear-gradient(135deg, ${theme.color}, ${theme.color2})` }}
+              >
+                <div className={styles.card}>
+                  <div className={styles.cardHeader}>
+                    <span className={styles.cardNumber} style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+                      {theme.number}
+                    </span>
+                    <div className={styles.cardHeaderText}>
+                      <h3 className={styles.cardTitle}>{theme.title}</h3>
+                      <p className={styles.cardTagline}>{theme.tagline}</p>
+                    </div>
+                  </div>
+
+                  <div className={styles.cardVisual}>
+                    <div
+                      className={styles.cardVisualGlow}
+                      style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
+                    />
+                    <IconComp size={72} strokeWidth={1} style={{ color: theme.color }} />
+                  </div>
+
+                  <p className={styles.cardDesc}>{theme.description}</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
     </section>
   )
 }

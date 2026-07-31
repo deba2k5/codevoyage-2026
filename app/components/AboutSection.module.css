@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #13141c; /* Deep, clean, professional dark slate */
+  background: var(--background);
   color: white;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,10 @@
   width: 100%;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .badge {
@@ -56,11 +60,12 @@
   padding: 2rem;
   border-radius: 0 12px 12px 0;
   max-width: 900px;
-  margin-bottom: 4rem;
+  margin: 0 auto 4rem;
   box-shadow: 0 15px 35px rgba(0,0,0,0.6);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: left;
 }
 
 .description {
