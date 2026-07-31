@@ -124,59 +124,152 @@
   margin: 0;
 }
 
-.timelineList {
+.roadmapWrap {
+  position: relative;
+  max-width: 1100px;
+}
+
+.roadmapSwiper {
+  padding-top: 2.5rem;
+  padding-bottom: 3.5rem !important;
+  overflow: visible;
+}
+
+.roadmapSwiper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(2.5rem + 24px);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(220, 38, 38, 0.05),
+    var(--primary) 15%,
+    var(--accent-yellow) 50%,
+    var(--primary) 85%,
+    rgba(220, 38, 38, 0.05)
+  );
+  z-index: 0;
+}
+
+.roadmapNode {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 900px;
+  align-items: center;
+  height: 100%;
+}
+
+.nodeDot {
+  position: relative;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, var(--primary), #7f1d1d);
+  border: 2px solid var(--accent-yellow);
+  color: white;
+  box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.12), 0 8px 20px -6px rgba(220, 38, 38, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stepIndex {
+  position: absolute;
+  top: 0;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-yellow);
+  opacity: 0.85;
 }
 
 .timelineCard {
+  margin-top: 20px;
+  width: 100%;
+  flex: 1;
   background: rgba(15, 17, 26, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   border-radius: 12px;
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.4rem;
   transition: all 0.3s;
 }
 
 .timelineCard:hover {
   border-color: var(--primary);
   background: rgba(22, 25, 38, 0.9);
-  transform: translateX(10px);
-  box-shadow: -5px 0 0 var(--primary), 0 10px 30px rgba(0,0,0,0.5);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px -20px rgba(220, 38, 38, 0.55);
 }
 
 .timelineTime {
+  align-self: flex-start;
   font-family: var(--font-heading);
-  font-size: 1.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
   color: var(--accent-yellow);
-  min-width: 110px;
-}
-
-.timelineContent {
-  flex: 1;
+  background: rgba(253, 224, 71, 0.12);
+  border: 1px solid rgba(253, 224, 71, 0.35);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
 }
 
 .timelineTitle {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 0.25rem;
   text-transform: uppercase;
 }
 
 .timelineDesc {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #94a3b8;
   margin: 0;
+  line-height: 1.4;
+}
+
+.roadmapSwiper :global(.swiper-button-next),
+.roadmapSwiper :global(.swiper-button-prev) {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  top: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.roadmapSwiper :global(.swiper-button-next):hover,
+.roadmapSwiper :global(.swiper-button-prev):hover {
+  background: linear-gradient(90deg, var(--primary), #b91c1c);
+  box-shadow: 0 12px 28px -12px rgba(220, 38, 38, 0.6);
+  transform: translateY(-2px);
+}
+.roadmapSwiper :global(.swiper-button-next):after,
+.roadmapSwiper :global(.swiper-button-prev):after {
+  font-size: 15px !important;
+}
+.roadmapSwiper :global(.swiper-button-disabled) {
+  opacity: 0.25 !important;
+}
+.roadmapSwiper :global(.swiper-pagination-bullet) {
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+}
+.roadmapSwiper :global(.swiper-pagination-bullet-active) {
+  background: linear-gradient(90deg, var(--primary), var(--accent-yellow));
 }
 
 /* Professional Tech Background Elements */
@@ -234,15 +327,6 @@
   }
   .title {
     font-size: 3.5rem;
-  }
-  .timelineCard {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .timelineTime {
-    min-width: auto;
-    color: var(--accent-cyan);
   }
 }
 
