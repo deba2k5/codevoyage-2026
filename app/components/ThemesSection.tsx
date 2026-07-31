@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import { GraduationCap, Landmark, Trophy, HeartPulse, Leaf, LucideIcon } from "lucide-react"
+import styles from "./ThemesSection.module.css"
 
 type Theme = {
   number: string
@@ -83,10 +84,10 @@ function ThemeCard({
   const IconComp = theme.icon
 
   return (
-    <div className="cardSticky" style={{ top: `${96 + index * 44}px`, zIndex: index + 1 }}>
-      <motion.div className="cardOuter" style={{ scale, willChange: "transform" }}>
+    <div className={styles.cardSticky} style={{ top: `${96 + index * 44}px`, zIndex: index + 1 }}>
+      <motion.div className={styles.cardOuter} style={{ scale, willChange: "transform" }}>
         <div
-          className="borderSpin"
+          className={styles.borderSpin}
           style={
             {
               "--c1": theme.color,
@@ -94,35 +95,35 @@ function ThemeCard({
             } as React.CSSProperties
           }
         />
-        <div className="cardInner">
+        <div className={styles.cardInner}>
           {index === 0 && (
-            <div className="sectionHeading">
-              <h2 className="sectionTitle">Themes</h2>
-              <p className="sectionSub">Five domains. Pick your battlefield.</p>
+            <div className={styles.sectionHeading}>
+              <h2 className={styles.sectionTitle}>Themes</h2>
+              <p className={styles.sectionSub}>Five domains. Pick your battlefield.</p>
             </div>
           )}
 
-          <div className="cardHeader">
-            <span className="cardNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+          <div className={styles.cardHeader}>
+            <span className={styles.cardNumber} style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
               {theme.number}
             </span>
-            <div className="cardHeaderText">
-              <h3 className="cardTitle">{theme.title}</h3>
-              <p className="cardTagline">{theme.tagline}</p>
+            <div className={styles.cardHeaderText}>
+              <h3 className={styles.cardTitle}>{theme.title}</h3>
+              <p className={styles.cardTagline}>{theme.tagline}</p>
             </div>
           </div>
 
-          <div className="cardBody">
-            <div className="cardVisual">
+          <div className={styles.cardBody}>
+            <div className={styles.cardVisual}>
               <div
-                className="cardVisualGlow"
+                className={styles.cardVisualGlow}
                 style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
               />
               <IconComp size={110} strokeWidth={1} style={{ color: theme.color }} />
             </div>
 
-            <div className="cardTextCol">
-              <p className="cardDesc">{theme.description}</p>
+            <div className={styles.cardTextCol}>
+              <p className={styles.cardDesc}>{theme.description}</p>
             </div>
           </div>
         </div>
@@ -142,208 +143,12 @@ export default function ThemesSection() {
     <section
       id="tracks"
       ref={containerRef}
-      className="stackSection"
+      className={styles.stackSection}
       style={{ height: `${themes.length * 100}vh` }}
     >
       {themes.map((theme, index) => (
         <ThemeCard key={theme.title} theme={theme} index={index} total={themes.length} progress={scrollYProgress} />
       ))}
-
-      <style jsx>{`
-        .stackSection {
-          position: relative;
-        }
-
-        .cardSticky {
-          position: sticky;
-          height: 88vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0 clamp(1rem, 4vw, 3rem);
-        }
-
-        .cardOuter {
-          position: relative;
-          width: 100%;
-          max-width: 1500px;
-          height: 84vh;
-          border-radius: 56px;
-          overflow: hidden;
-          isolation: isolate;
-          box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
-        }
-
-        .borderSpin {
-          position: absolute;
-          inset: -60%;
-          background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c1));
-          animation: spin 7s linear infinite;
-          will-change: transform;
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        .cardInner {
-          position: absolute;
-          inset: 3px;
-          background: #000;
-          border-radius: 53px;
-          padding: clamp(2rem, 4vw, 3.5rem);
-          display: flex;
-          flex-direction: column;
-          gap: clamp(1.5rem, 3vw, 2.5rem);
-          overflow: hidden;
-        }
-
-        .sectionHeading {
-          text-align: center;
-          margin-bottom: 0.5rem;
-        }
-
-        .sectionTitle {
-          font-family: var(--font-heading);
-          font-size: clamp(1.75rem, 3vw, 2.5rem);
-          font-weight: 700;
-          color: white;
-        }
-
-        .sectionSub {
-          font-size: 1rem;
-          color: rgba(255, 255, 255, 0.5);
-          margin-top: 0.35rem;
-        }
-
-        .cardHeader {
-          display: flex;
-          align-items: baseline;
-          gap: 1.5rem;
-        }
-
-        .cardNumber {
-          font-family: var(--font-heading);
-          font-size: clamp(3.5rem, 6vw, 6rem);
-          line-height: 0.85;
-          font-weight: 700;
-          color: transparent;
-          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35);
-        }
-
-        .cardHeaderText {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-        }
-
-        .cardTitle {
-          font-family: var(--font-heading);
-          font-size: clamp(1.5rem, 3.2vw, 2.5rem);
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          color: white;
-        }
-
-        .cardTagline {
-          font-size: 1.05rem;
-          color: rgba(255, 255, 255, 0.5);
-        }
-
-        .cardBody {
-          flex: 1;
-          display: grid;
-          grid-template-columns: minmax(0, 45%) 1fr;
-          gap: clamp(1.5rem, 4vw, 3.5rem);
-          align-items: center;
-          min-height: 0;
-        }
-
-        .cardVisual {
-          position: relative;
-          height: 100%;
-          min-height: 200px;
-          border-radius: 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        .cardVisualGlow {
-          position: absolute;
-          inset: -20%;
-          filter: blur(40px);
-        }
-
-        .cardTextCol {
-          display: flex;
-          align-items: center;
-        }
-
-        .cardDesc {
-          font-size: clamp(1.1rem, 2vw, 1.6rem);
-          line-height: 1.5;
-          color: rgba(255, 255, 255, 0.85);
-          max-width: 50ch;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .borderSpin {
-            animation: none;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .stackSection {
-            height: auto !important;
-          }
-
-          .cardSticky {
-            position: relative;
-            top: auto !important;
-            height: auto;
-            min-height: 100vh;
-            padding: 5.5rem 1rem 2rem;
-          }
-
-          .cardOuter {
-            height: auto;
-            min-height: 80vh;
-            border-radius: 32px;
-          }
-
-          .cardInner {
-            position: relative;
-            inset: auto;
-            margin: 3px;
-            width: auto;
-            border-radius: 29px;
-            padding: 1.5rem;
-            gap: 1.25rem;
-          }
-
-          .cardBody {
-            grid-template-columns: 1fr;
-          }
-
-          .cardVisual {
-            min-height: 160px;
-          }
-
-          .cardNumber {
-            font-size: 2.75rem;
-          }
-
-          .cardTitle {
-            font-size: 1.4rem;
-          }
-        }
-      `}</style>
     </section>
   )
 }
