@@ -4,7 +4,7 @@ import { use, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Calendar, Trophy, UserPlus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Trophy, UserPlus } from 'lucide-react';
 import { characters } from '../../data/characters';
 import styles from './CharacterPage.module.css';
 import CyberNavbar from '../../components/CyberNavbar';
@@ -265,49 +265,6 @@ export default function CharacterPage({ params }: Props) {
       {character.id === 'hulk' && (
         <HulkGame themeColor={character.themeColor} />
       )}
-
-      {/* SECTION 3: ACTUAL EVENT SNIPPETS // CODE VOYAGE INTEL */}
-      <section className={styles.section}>
-        <motion.h2 
-          className={styles.sectionTitle} 
-          style={{ color: character.themeColor }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Code Voyage // Event Intel
-        </motion.h2>
-        <div className={styles.grid}>
-          <div className={styles.card} style={{ borderLeftColor: character.themeColor }}>
-            <div className={styles.cardContent}>
-              <Calendar size={36} style={{ color: character.themeColor, marginBottom: '1.25rem' }} />
-              <h3 className={styles.cardTitle} style={{ color: character.themeColor }}>8-Hour Hackathon</h3>
-              <p className={styles.cardText}>
-                An intense, on-campus sprint where teams of 2 to 4 build real-world working prototypes from scratch. Open to all undergraduate colleges with expert on-site mentoring and networking.
-              </p>
-            </div>
-          </div>
-          <div className={styles.card} style={{ borderLeftColor: character.themeColor }}>
-            <div className={styles.cardContent}>
-              <Trophy size={36} style={{ color: character.themeColor, marginBottom: '1.25rem' }} />
-              <h3 className={styles.cardTitle} style={{ color: character.themeColor }}>On-Spot Challenges</h3>
-              <p className={styles.cardText}>
-                Tackle live, secret problem statements revealed at countdown across cutting-edge tracks: AI & Machine Learning, Web & Mobile Apps, AR & VR, IoT, Cybersecurity, and Blockchain.
-              </p>
-            </div>
-          </div>
-          <div className={styles.card} style={{ borderLeftColor: character.themeColor }}>
-            <div className={styles.cardContent}>
-              <UserPlus size={36} style={{ color: character.themeColor, marginBottom: '1.25rem' }} />
-              <h3 className={styles.cardTitle} style={{ color: character.themeColor }}>Bounties & Career Perks</h3>
-              <p className={styles.cardText}>
-                Compete for $5,000 & $2,500 prize pools, exclusive hardware bounties, official merit certificates, and guaranteed direct internship interviews with our headline tech sponsors.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Registration Portal */}
       <section className={`${styles.section} ${styles.darkSection}`}>
