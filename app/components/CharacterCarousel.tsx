@@ -1,65 +1,33 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './CharacterCarousel.module.css';
 
 interface Props {
   characters: any[];
+  activeCharacterId: string;
   onHoverCharacter: (characterId: string | null) => void;
   onSelectCharacter: (characterId: string) => void;
 }
 
-export default function CharacterCarousel({ characters, onHoverCharacter, onSelectCharacter }: Props) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [spotlightIndex, setSpotlightIndex] = useState(0);
-  const [manualHoverId, setManualHoverId] = useState<string | null>(null);
-
-  // Auto-cycle a "spotlight" through the roster, one hero at a time,
-  // pausing while the user is actually hovering a card themselves.
-  useEffect(() => {
-    if (manualHoverId !== null) return;
-
-    const interval = setInterval(() => {
-      setSpotlightIndex((prev) => (prev + 1) % characters.length);
-    }, 1600);
-
-    return () => clearInterval(interval);
-  }, [manualHoverId, characters.length]);
-
-  const handleCharacterClick = (id: string) => {
-    onSelectCharacter(id);
-  };
-
-  const handleMouseEnter = (id: string) => {
-    setManualHoverId(id);
-    onHoverCharacter(id);
-  };
-
-  const handleMouseLeave = () => {
-    setManualHoverId(null);
-    onHoverCharacter(null);
-  };
-
+export default function CharacterCarousel({ characters, activeCharacterId, onHoverCharacter, onSelectCharacter }: Props) {
   return (
     <div className={styles.carouselContainer}>
       <div className={styles.sectionHeader}>
         <span className={styles.headerDot} />
         SELECT HERO OPERATIVE // ROSTER
       </div>
-      <div
-        className={styles.carouselTrack}
-        ref={scrollRef}
-      >
+      <div className={styles.carouselTrack}>
         {characters.map((char, index) => {
-          const isActive = manualHoverId ? manualHoverId === char.id : spotlightIndex === index;
+          const isActive = activeCharacterId === char.id;
           return (
             <motion.div
               key={char.id}
               className={styles.characterCard}
-              onClick={() => handleCharacterClick(char.id)}
-              onMouseEnter={() => handleMouseEnter(char.id)}
-              onMouseLeave={handleMouseLeave}
+              onClick={() => onSelectCharacter(char.id)}
+              onMouseEnter={() => onHoverCharacter(char.id)}
+              onMouseLeave={() => onHoverCharacter(null)}
               initial={{ opacity: 0, y: 50 }}
               animate={{
                 opacity: 1,

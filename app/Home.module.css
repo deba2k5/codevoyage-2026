@@ -250,6 +250,53 @@
   flex-shrink: 0;
 }
 
+.featuredStage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.featuredRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.featuredText {
+  text-align: left;
+}
+
+.featuredName {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featuredLine {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .featuredRow {
+    gap: 1.25rem;
+  }
+  .featuredName {
+    font-size: 1.6rem;
+  }
+  .featuredLine {
+    font-size: 0.9rem;
+  }
+}
+
 /* Background elements */
 .diagonalBg {
   position: absolute;
