@@ -1,7 +1,7 @@
 "use client"
 
+import { MapPin, Calendar, Clock, Mail, Phone } from "lucide-react"
 import { Facebook, Instagram, Linkedin } from "@/components/ui/social-icons"
-
 
 export default function Footer() {
   const contacts = [
@@ -11,45 +11,87 @@ export default function Footer() {
   ]
 
   return (
-    <footer id="contact" className={`bg-card/50 backdrop-blur-sm border-t border-border `}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h2 className="text-center text-2xl sm:text-3xl font-semibold tracking-wide mb-6 text-[#fffffe]">
-          Contact Us
-        </h2>
+    <footer id="contact" className="bg-card/50 backdrop-blur-sm border-t border-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          {/* Event info */}
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold tracking-wide mb-4 text-[#fffffe]">
+              Code Voyage
+            </h3>
+            <ul className="space-y-3 text-sm sm:text-base text-[#fffffecc]">
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
+                <span>IEM Gurukul Building, Kolkata</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Calendar className="h-4 w-4 mt-0.5 shrink-0" />
+                <span>20th September 2025</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Clock className="h-4 w-4 mt-0.5 shrink-0" />
+                <span>10:00 AM - 6:00 PM (8-Hour Hackathon)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Mail className="h-4 w-4 mt-0.5 shrink-0" />
+                <a href="mailto:support@codevoyage.tech" className="hover:text-[#fffffe] transition-colors">
+                  support@codevoyage.tech
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        {/* Click-to-call CTAs (smaller) */}
-        <ul className="max-w-3xl mx-auto text-center space-y-3">
-          {contacts.map((c) => (
-            <li key={c.phone} className="text-sm sm:text-base">
-              <a href={`tel:${c.phone}`} aria-label={`Call ${c.name}`} className="contactRow">
-                <span className="name">{c.name}</span>
-                <span className="dash">-</span>
-                <span className="phoneChip">{c.phone}</span>
+          {/* Contact */}
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold tracking-wide mb-4 text-[#fffffe]">
+              Contact Us
+            </h3>
+            <ul className="space-y-3">
+              {contacts.map((c) => (
+                <li key={c.phone}>
+                  <a href={`tel:${c.phone}`} aria-label={`Call ${c.name}`} className="contactRow">
+                    <Phone className="h-3.5 w-3.5 shrink-0" />
+                    <span className="name">{c.name}</span>
+                    <span className="dash">-</span>
+                    <span className="phoneChip">{c.phone}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick links & social */}
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold tracking-wide mb-4 text-[#fffffe]">
+              Connect
+            </h3>
+            <ul className="space-y-2 text-sm sm:text-base text-[#fffffecc] mb-6">
+              <li><a href="/about" className="hover:text-[#fffffe] transition-colors">About</a></li>
+              <li><a href="/event" className="hover:text-[#fffffe] transition-colors">Event Details</a></li>
+              <li><a href="/contact" className="hover:text-[#fffffe] transition-colors">Contact & FAQs</a></li>
+            </ul>
+            <div className="flex items-center gap-4">
+              <a href="https://www.instagram.com/iemhackoasis2.0?igsh=YmdoMGE2eWw5bmVj" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="iconLink">
+                <Instagram className="h-5 w-5" />
               </a>
-            </li>
-          ))}
-        </ul>
+              <a href="https://www.linkedin.com/company/your_company" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="iconLink">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="https://www.facebook.com/share/1D1VUXVaWi/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="iconLink">
+                <Facebook className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
 
-        {/* Bottom bar (smaller) */}
+        {/* Bottom bar */}
         <div
-          className="mt-8 pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          className="mt-10 pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between max-w-5xl mx-auto"
           style={{ borderTop: "1px solid #7f1d1d66" }}
         >
           <p className="text-xs sm:text-sm text-[#fffffecc] text-center sm:text-left">
             © 2025 Code Voyage
           </p>
-
-          <div className="flex items-center justify-center gap-4">
-            <a href="https://www.instagram.com/iemhackoasis2.0?igsh=YmdoMGE2eWw5bmVj" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="iconLink">
-              <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
-            </a>
-            <a href="https://www.linkedin.com/company/your_company" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="iconLink">
-              <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
-            </a>
-            <a href="https://www.facebook.com/share/1D1VUXVaWi/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="iconLink">
-              <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
-            </a>
-          </div>
         </div>
       </div>
 
@@ -57,9 +99,9 @@ export default function Footer() {
         .contactRow {
           display: inline-flex;
           align-items: center;
-          gap: 8px;                 /* tighter gap */
-          padding: 6px 12px;        /* smaller padding */
-          border-radius: 12px;      /* slightly smaller radius */
+          gap: 8px;
+          padding: 6px 12px;
+          border-radius: 12px;
           color: #fffffe;
           text-decoration: none;
           background: linear-gradient(90deg, rgba(220, 38, 38,0.16), rgba(220, 38, 38,0.08));
@@ -72,17 +114,18 @@ export default function Footer() {
           border-color: rgba(248, 113, 113,0.5);
           box-shadow: 0 8px 18px rgba(220, 38, 38,0.18);
         }
-        .name { color: #fffffe; font-weight: 600; }
+        .name { color: #fffffe; font-weight: 600; font-size: 0.875rem; }
         .dash { color: #ffffff80; }
         .phoneChip {
-          color: #fffffe;           /* strong contrast */
+          color: #fffffe;
           font-weight: 800;
           letter-spacing: 0.25px;
-          padding: 2px 8px;         /* slimmer chip */
+          padding: 2px 8px;
           border-radius: 9px;
           background: linear-gradient(90deg, rgba(220, 38, 38,0.28), rgba(220, 38, 38,0.16));
           border: 1px solid rgba(248, 113, 113,0.5);
           text-shadow: 0 0 5px rgba(0,0,0,0.35);
+          font-size: 0.75rem;
         }
         .iconLink {
           color: #fffffecc;

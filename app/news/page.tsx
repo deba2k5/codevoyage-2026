@@ -11,7 +11,7 @@ export default function NewsPage() {
     {
       date: "LATEST BULLETIN // SEPTEMBER 2025",
       title: "Code Voyage 2026 Registrations Open",
-      description: "Registration is completely free and open to all undergraduate college students. Form teams of 2 to 4 developers across different colleges and prepare for a 9-hour on-campus sprint.",
+      description: "Registration is completely free and open to all undergraduate college students. Form teams of 2 to 4 developers across different colleges and prepare for an 8-hour hackathon.",
     },
     {
       date: "POLICY UPDATE // PROTOCOL",
@@ -111,7 +111,7 @@ export default function NewsPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Stay updated with official bulletins, event protocols, and the complete 9-hour coding sprint schedule.
+          Stay updated with official bulletins, event protocols, and the complete 8-hour hackathon schedule.
         </motion.p>
 
         <section className={styles.newsSection}>

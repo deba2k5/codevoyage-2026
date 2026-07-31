@@ -62,7 +62,7 @@ export default function ScheduleSection() {
             Event Schedule
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            A 9-hour coding journey from ideation to implementation
+            An 8-hour coding journey from ideation to implementation
           </p>
         </div>
 

@@ -17,7 +17,7 @@ import Footer from "./components/footer"
 export const metadata: Metadata = {
   title: "CodeVoyage — Hackathon",
   description:
-    "CodeVoyage is a 9 hour offline on-campus hackathon sprint. Build real world prototypes across AI/ML, Web & App, AR/VR, IoT and Cybersecurity.",
+    "CodeVoyage is an 8 hour hackathon. Build real world prototypes across AI/ML, Web & App, AR/VR, IoT and Cybersecurity.",
 }
 
 export default function EventPage() {

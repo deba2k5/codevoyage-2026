@@ -13,7 +13,7 @@ export default function ShieldPage() {
       role: "Director of Strategic Operations // Overall Coordinator",
       clearance: "LEVEL 10 // ACTIVE",
       phone: "9883177160",
-      briefing: "Directs high-level hackathon architecture, inter-college diplomacy, sponsor relations, and overall mission protocol during the 9-hour on-campus sprint.",
+      briefing: "Directs high-level hackathon architecture, inter-college diplomacy, sponsor relations, and overall mission protocol during the 8-hour hackathon.",
     },
     {
       name: "Debangkita Saha",
@@ -34,7 +34,7 @@ export default function ShieldPage() {
   const supportSquads = [
     {
       title: "AI & ML Technical Lead",
-      desc: "Manages model evaluation criteria, dataset integrity, and GPU resource mentorship during the intense 9-hour hacking sprint."
+      desc: "Manages model evaluation criteria, dataset integrity, and GPU resource mentorship during the intense 8-hour hackathon."
     },
     {
       title: "Cybersecurity & Web3 Sentinel",
@@ -84,7 +84,7 @@ export default function ShieldPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Welcome to the Strategic Hazard Intervention Espionage Logistics Directorate for Code Voyage. 
-          Meet the strategic minds, tactical architects, and student coordinators behind our 9-hour on-campus sprint.
+          Meet the strategic minds, tactical architects, and student coordinators behind our 8-hour hackathon.
         </motion.p>
 
         {/* Division I: Executive Directorate */}

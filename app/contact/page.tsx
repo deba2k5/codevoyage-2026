@@ -153,7 +153,7 @@ export default function ContactPage() {
             <div className={styles.infoRow}>
               <Clock size={24} style={{ color: 'var(--accent-cyan)' }} />
               <div>
-                <strong>Hours:</strong> 10:00 AM - 6:00 PM (9 Hours Sprint)
+                <strong>Hours:</strong> 10:00 AM - 6:00 PM (8-Hour Hackathon)
               </div>
             </div>
             <div className={styles.infoRow}>

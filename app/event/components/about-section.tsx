@@ -34,7 +34,7 @@ export default function AboutSection() {
               About Code Voyage
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Code Voyage is an inter and intra college hackathon, a 9 hour offline on-campus sprint
+            Code Voyage is an inter and intra college hackathon, an 8 hour hackathon
             where teams of 2 to 4 build real world prototypes across AI and ML, Web and App, AR and VR,
             IoT, and Cybersecurity. Open to all undergraduate colleges, with on-spot problem statements,
             expert mentoring, certificates, prizes, internship opportunities, and networking.

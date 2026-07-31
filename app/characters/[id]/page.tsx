@@ -282,7 +282,7 @@ export default function CharacterPage({ params }: Props) {
           <div className={styles.card} style={{ borderLeftColor: character.themeColor }}>
             <div className={styles.cardContent}>
               <Calendar size={36} style={{ color: character.themeColor, marginBottom: '1.25rem' }} />
-              <h3 className={styles.cardTitle} style={{ color: character.themeColor }}>9-Hour Offline Sprint</h3>
+              <h3 className={styles.cardTitle} style={{ color: character.themeColor }}>8-Hour Hackathon</h3>
               <p className={styles.cardText}>
                 An intense, on-campus sprint where teams of 2 to 4 build real-world working prototypes from scratch. Open to all undergraduate colleges with expert on-site mentoring and networking.
               </p>

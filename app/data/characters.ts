@@ -32,7 +32,7 @@ export const characters: Character[] = [
     imageAlt: "Spider-Man hero pose",
     image: "/heroes/spiderman.jpg",
     domainSpecialty: "Web & App Development // AR & VR Systems",
-    hackathonConnection: "Just as Peter Parker formulated synthetic web-fluid and engineered mechanical shooters on a high school student's budget overnight, Spider-Man embodies our Web & App and AR/VR tracks. He represents agile, user-centric prototyping during our intense 9-hour on-campus sprint—building lightweight, lightning-fast solutions with zero bloat under extreme pressure.",
+    hackathonConnection: "Just as Peter Parker formulated synthetic web-fluid and engineered mechanical shooters on a high school student's budget overnight, Spider-Man embodies our Web & App and AR/VR tracks. He represents agile, user-centric prototyping during our intense 8-hour hackathon—building lightweight, lightning-fast solutions with zero bloat under extreme pressure.",
     trivia: [
       { title: "Synthetic Web-Fluid", detail: "Formulated his own tensile polymer adhesive and precision mechanical web-shooters in a high school chemistry lab." },
       { title: "Spidey-Sense Neural Alert", detail: "Possesses a precognitive sixth sense that reacts to incoming threats faster than human neural reflexes, acting as an automated real-time intrusion alarm." },
@@ -70,7 +70,7 @@ export const characters: Character[] = [
     imageAlt: "Captain America with shield",
     image: "/heroes/captainamerica.jpg",
     domainSpecialty: "Cybersecurity Defense // Team Scrum Lead",
-    hackathonConnection: "In a hackathon squad of 2 to 4 operatives, Captain America represents the Cybersecurity track and the critical role of agile leadership. He shields systems from vulnerabilities and keeps the squad coordinated through the 9-hour offline sprint to claim top bounties and internship opportunities.",
+    hackathonConnection: "In a hackathon squad of 2 to 4 operatives, Captain America represents the Cybersecurity track and the critical role of agile leadership. He shields systems from vulnerabilities and keeps the squad coordinated through the 8-hour hackathon to claim top bounties and internship opportunities.",
     trivia: [
       { title: "Project Rebirth Enhancement", detail: "Enhanced to the absolute pinnacle of human physical and mental perfection, granting him eidetic memory and tactical processing speeds." },
       { title: "Vibranium Kinetic Shield", detail: "Wields a unique concave disk composed of a Proto-Adamantium and Vibranium alloy that absorbs 100% of kinetic impact with zero recoil." },
@@ -108,7 +108,7 @@ export const characters: Character[] = [
     imageAlt: "Incredible Hulk smashing",
     image: "/heroes/hulk.jpg",
     domainSpecialty: "Big Data Analytics // Heavy Backend Architecture",
-    hackathonConnection: "When brute computational force is required to crunch massive datasets or smash through algorithmic bottlenecks, Hulk represents Heavy Backend Architecture and AI Model Training. Banner's 7-PhD intellect combined with Hulk's unstoppable execution is the exact formula needed to conquer our 9-hour sprint and win the $5,000 top prize.",
+    hackathonConnection: "When brute computational force is required to crunch massive datasets or smash through algorithmic bottlenecks, Hulk represents Heavy Backend Architecture and AI Model Training. Banner's 7-PhD intellect combined with Hulk's unstoppable execution is the exact formula needed to conquer our 8-hour hackathon and win the $5,000 top prize.",
     trivia: [
       { title: "Gamma Radiation Pioneer", detail: "Dr. Bruce Banner is the world's foremost authority on nuclear physics, gamma radiation transformation, and bio-informatics." },
       { title: "Infinite Auto-Scaling", detail: "Hulk's physical strength and durability scale exponentially with adrenaline and stress, functioning like an infinitely auto-scaling compute engine." },
