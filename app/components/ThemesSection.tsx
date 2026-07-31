@@ -12,7 +12,6 @@ const themes = [
       "Learning is broken in a hundred small ways. Build platforms, tools, and experiences that make education work for every student, everywhere.",
     icon: GraduationCap,
     color: "#67e8f9",
-    color2: "#dc2626",
   },
   {
     number: "02",
@@ -22,7 +21,6 @@ const themes = [
       "Payments, lending, and banking still lock people out. Build the rails that make money move faster, safer, and fairer for everyone.",
     icon: Landmark,
     color: "#fde047",
-    color2: "#67e8f9",
   },
   {
     number: "03",
@@ -32,7 +30,6 @@ const themes = [
       "From fan engagement to athlete performance, sport runs on data now. Build the tools that give players and fans an edge.",
     icon: Trophy,
     color: "#dc2626",
-    color2: "#fde047",
   },
   {
     number: "04",
@@ -42,7 +39,6 @@ const themes = [
       "Healthcare is slow, expensive, and hard to access. Build diagnostics, care tools, and platforms that put people first.",
     icon: HeartPulse,
     color: "#34d399",
-    color2: "#67e8f9",
   },
   {
     number: "05",
@@ -52,22 +48,12 @@ const themes = [
       "Climate change won't wait. Build the clean energy, waste reduction, and conservation tech that buys us time.",
     icon: Leaf,
     color: "#67e8f9",
-    color2: "#34d399",
   },
 ]
 
 export default function ThemesSection() {
   return (
-    <section id="tracks" className="relative py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Themes</h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mt-4">
-            Five domains. Pick your battlefield.
-          </p>
-        </div>
-      </div>
-
+    <section id="tracks" className="relative">
       <div className="stackWrap">
         {themes.map((theme, index) => {
           const IconComp = theme.icon
@@ -75,30 +61,35 @@ export default function ThemesSection() {
             <div
               key={theme.title}
               className="stackItem"
-              style={{ top: `${72 + index * 10}px`, zIndex: index + 1 }}
+              style={{ zIndex: index + 1 }}
             >
               <motion.div
-                className="stackCardOuter"
-                style={{ background: `linear-gradient(135deg, ${theme.color}, ${theme.color2})` }}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5 }}
+                className="stackCard"
+                style={{ borderTopColor: theme.color }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4 }}
               >
-                <div className="stackCard">
-                  <div
-                    className="stackIconGlow"
-                    style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
-                  />
-                  <IconComp size={64} strokeWidth={1} style={{ color: theme.color }} className="stackIcon" />
+                {index === 0 && (
+                  <div className="stackHeading">
+                    <h2 className="stackHeadingTitle">Themes</h2>
+                    <p className="stackHeadingSub">Five domains. Pick your battlefield.</p>
+                  </div>
+                )}
 
-                  <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
-                    {theme.number}
-                  </span>
-                  <h3 className="stackTitle">{theme.title}</h3>
-                  <p className="stackTagline">{theme.tagline}</p>
-                  <p className="stackDesc">{theme.description}</p>
-                </div>
+                <div
+                  className="stackIconGlow"
+                  style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
+                />
+                <IconComp size={72} strokeWidth={1} style={{ color: theme.color }} className="stackIcon" />
+
+                <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+                  {theme.number}
+                </span>
+                <h3 className="stackTitle">{theme.title}</h3>
+                <p className="stackTagline">{theme.tagline}</p>
+                <p className="stackDesc">{theme.description}</p>
               </motion.div>
             </div>
           )
@@ -112,50 +103,57 @@ export default function ThemesSection() {
 
         .stackItem {
           position: sticky;
-          height: 74vh;
-          min-height: 480px;
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
-          padding-bottom: 6rem;
-        }
-
-        .stackItem:not(:last-child) {
-          margin-bottom: 10vh;
-        }
-
-        .stackCardOuter {
-          width: 100%;
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 2px;
-          border-radius: 2.5rem;
-          box-shadow: 0 0 60px -20px rgba(0, 0, 0, 0.6);
+          top: 0;
+          height: 100vh;
         }
 
         .stackCard {
           position: relative;
+          width: 100%;
           height: 100%;
           background: #000;
-          border-radius: calc(2.5rem - 2px);
-          padding: clamp(2rem, 5vw, 4rem);
+          border-top: 4px solid;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
           gap: 0.75rem;
+          padding: clamp(2rem, 5vw, 4rem);
           overflow: hidden;
+        }
+
+        .stackHeading {
+          position: absolute;
+          top: clamp(1.5rem, 4vw, 3rem);
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+
+        .stackHeadingTitle {
+          font-family: var(--font-heading);
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          color: white;
+        }
+
+        .stackHeadingSub {
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.5);
+          margin-top: 0.5rem;
         }
 
         .stackIconGlow {
           position: absolute;
-          top: -10%;
+          top: 30%;
           left: 50%;
-          width: 60%;
-          height: 60%;
-          transform: translateX(-50%);
-          filter: blur(40px);
+          width: 50vw;
+          height: 50vw;
+          max-width: 500px;
+          max-height: 500px;
+          transform: translate(-50%, -50%);
+          filter: blur(60px);
           pointer-events: none;
         }
 
@@ -167,7 +165,7 @@ export default function ThemesSection() {
         .stackNumber {
           position: relative;
           font-family: var(--font-heading);
-          font-size: clamp(3.5rem, 6vw, 5.5rem);
+          font-size: clamp(4rem, 8vw, 7rem);
           line-height: 0.85;
           font-weight: 700;
           color: transparent;
@@ -177,7 +175,7 @@ export default function ThemesSection() {
         .stackTitle {
           position: relative;
           font-family: var(--font-heading);
-          font-size: clamp(1.5rem, 3vw, 2.25rem);
+          font-size: clamp(1.75rem, 4vw, 3rem);
           font-weight: 700;
           letter-spacing: 0.06em;
           color: white;
@@ -185,37 +183,31 @@ export default function ThemesSection() {
 
         .stackTagline {
           position: relative;
-          font-size: 1rem;
+          font-size: 1.15rem;
           color: rgba(255, 255, 255, 0.5);
           margin-bottom: 0.5rem;
         }
 
         .stackDesc {
           position: relative;
-          font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+          font-size: clamp(1.05rem, 1.8vw, 1.35rem);
           line-height: 1.55;
           color: rgba(255, 255, 255, 0.8);
           max-width: 55ch;
         }
 
         @media (max-width: 768px) {
-          .stackItem {
-            height: auto;
-            min-height: 0;
-            padding-bottom: 3rem;
-          }
-
           .stackCard {
             padding: 1.75rem;
             gap: 0.6rem;
           }
 
           .stackNumber {
-            font-size: 2.75rem;
+            font-size: 3rem;
           }
 
           .stackTitle {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
           }
         }
       `}</style>
