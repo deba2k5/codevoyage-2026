@@ -80,7 +80,7 @@ export default function CyberNavbar() {
           rel="noopener noreferrer"
           className={styles.navButton}
         >
-          SIGN UP
+          REGISTER NOW
         </a>
       </nav>
     </header>
