@@ -1,23 +1,20 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { characters } from '../data/characters';
 import styles from './CharacterCarousel.module.css';
 
 interface Props {
   characters: any[];
   onHoverCharacter: (characterId: string | null) => void;
+  onSelectCharacter: (characterId: string) => void;
 }
 
-export default function CharacterCarousel({ characters, onHoverCharacter }: Props) {
+export default function CharacterCarousel({ characters, onHoverCharacter, onSelectCharacter }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const handleCharacterClick = (id: string) => {
-    // Navigate to the character specific page
-    router.push(`/characters/${id}`);
+    onSelectCharacter(id);
   };
 
   return (

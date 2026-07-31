@@ -4,14 +4,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { JetBrains_Mono } from 'next/font/google';
 import { Clock, Users, Trophy, Coffee, MapPin } from 'lucide-react';
-import CyberNavbar from '../components/CyberNavbar';
-import styles from './Timeline.module.css';
+import styles from './TimelineSection.module.css';
 
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['500', '700', '800'] });
 
 const ROW_HEIGHT = 260;
 
-export default function TimelinePage() {
+export default function TimelineSection() {
   const schedule = [
     {
       time: "9:00 AM",
@@ -79,37 +78,38 @@ export default function TimelinePage() {
     .join(' ');
 
   return (
-    <div className={styles.container}>
+    <section id="timeline" className={styles.container}>
       <div className={styles.bgGrid} />
       <div className={styles.glowRed} />
       <div className={styles.glowCyan} />
       <div className={styles.glowYellow} />
 
-      <CyberNavbar />
-
-      <main className={styles.mainContent}>
+      <div className={styles.mainContent}>
         <motion.div
           className={styles.badge}
           initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
           <MapPin size={18} /> MISSION TIMELINE
         </motion.div>
 
-        <motion.h1
+        <motion.h2
           className={`${styles.title} ${mono.className}`}
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, type: 'spring' }}
         >
           TIMELINE
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           className={styles.subtitle}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           The complete 8-hour hackathon schedule, from check-in to closing ceremony.
@@ -178,7 +178,7 @@ export default function TimelinePage() {
             );
           })}
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }

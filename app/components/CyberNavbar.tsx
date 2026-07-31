@@ -1,36 +1,62 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import styles from './CyberNavbar.module.css';
 
-export default function CyberNavbar() {
-  const pathname = usePathname();
-  const router = useRouter();
+const NAV_LINKS = [
+  { href: '#hero', label: 'HERO' },
+  { href: '#character', label: 'HEROES' },
+  { href: '#about', label: 'ABOUT' },
+  { href: '#tracks', label: 'THEMES' },
+  { href: '#timeline', label: 'TIMELINE' },
+  { href: '#prizes', label: 'PRIZES' },
+  { href: '#faq', label: 'FAQ' },
+];
 
-  const handleSignUp = () => {
-    router.push('/event');
+export default function CyberNavbar() {
+  const scrollTo = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles.logo}>CODEVOYAGE</Link>
-      
+      <a
+        href="#hero"
+        className={styles.logo}
+        onClick={(e) => {
+          e.preventDefault();
+          scrollTo('#hero');
+        }}
+      >
+        CODEVOYAGE
+      </a>
+
       <nav className={styles.navLinks}>
-        <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.activeLink : ''}`}>HERO</Link>
-        <span className={styles.slash}>/</span>
-        <Link href="/timeline" className={`${styles.navLink} ${pathname === '/timeline' ? styles.activeLink : ''}`}>TIMELINE</Link>
-        <span className={styles.slash}>/</span>
-        <Link href="/contact" className={`${styles.navLink} ${pathname === '/contact' ? styles.activeLink : ''}`}>CONTACT</Link>
-        <span className={styles.slash}>/</span>
-        <Link href="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.activeLink : ''}`}>ABOUT US</Link>
-        <span className={styles.slash}>/</span>
-        <Link href="/themes" className={`${styles.navLink} ${pathname === '/themes' ? styles.activeLink : ''}`}>THEMES</Link>
-        <span className={styles.slash}>/</span>
-        <Link href="/shield" className={`${styles.navLink} ${pathname === '/shield' ? styles.activeLink : ''}`}>S.H.I.E.L.D.</Link>
-        
-        <button className={styles.navButton} onClick={handleSignUp}>SIGN UP</button>
+        {NAV_LINKS.map((link, i) => (
+          <React.Fragment key={link.href}>
+            <a
+              href={link.href}
+              className={styles.navLink}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo(link.href);
+              }}
+            >
+              {link.label}
+            </a>
+            {i < NAV_LINKS.length - 1 && <span className={styles.slash}>/</span>}
+          </React.Fragment>
+        ))}
+
+        <a
+          href="https://forms.gle/YOUR_FORM_ID"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.navButton}
+        >
+          SIGN UP
+        </a>
       </nav>
     </header>
   );

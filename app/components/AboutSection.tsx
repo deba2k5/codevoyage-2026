@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap } from 'lucide-react';
-import CyberNavbar from '../components/CyberNavbar';
-import styles from './About.module.css';
+import styles from './AboutSection.module.css';
 
 const MISSION_TEXT =
   "CodeVoyage 2026 is the flagship 8-hour hackathon organized by the Department of " +
@@ -36,49 +35,47 @@ function TypewriterText({ text, active, speed = 45 }: { text: string; active: bo
   );
 }
 
-export default function AboutPage() {
+export default function AboutSection() {
   const [active, setActive] = useState(false);
 
   return (
-    <div className={styles.container}>
-      {/* Professional Tech Background */}
+    <section id="about" className={styles.container}>
       <div className={styles.bgGrid} />
       <div className={styles.glowRed} />
       <div className={styles.glowCyan} />
-      <div className={styles.glowYellow} />
 
-      <CyberNavbar />
-
-      <main className={styles.mainContent}>
+      <div className={styles.mainContent}>
         <motion.div
           className={styles.badge}
           initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
           <Zap size={18} /> MISSION BRIEFING // ABOUT US
         </motion.div>
 
-        <motion.h1
+        <motion.h2
           className={styles.title}
           initial={{ opacity: 0, x: -50, skewX: 10 }}
-          animate={{ opacity: 1, x: 0, skewX: 0 }}
+          whileInView={{ opacity: 1, x: 0, skewX: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, type: 'spring' }}
         >
           About Code Voyage
-        </motion.h1>
+        </motion.h2>
 
         <motion.div
           className={styles.descriptionBox}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          whileInView={{ opacity: 1, y: 0 }}
           onViewportEnter={() => setActive(true)}
           viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
           <TypewriterText text={MISSION_TEXT} active={active} />
         </motion.div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
