@@ -41,7 +41,7 @@ curl -fsSL https://bun.sh/install | bash
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/anurag-05-cmd/codevoyage-website.git
+   git clone https://github.com/iemaserver/codevoyage-website.git
    cd codevoyage-website
    ```
 
