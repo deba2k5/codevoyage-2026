@@ -1,9 +1,20 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { GraduationCap, Landmark, Trophy, HeartPulse, Leaf } from "lucide-react"
+import { useRef } from "react"
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
+import { GraduationCap, Landmark, Trophy, HeartPulse, Leaf, LucideIcon } from "lucide-react"
 
-const themes = [
+type Theme = {
+  number: string
+  title: string
+  tagline: string
+  description: string
+  icon: LucideIcon
+  color: string
+  color2: string
+}
+
+const themes: Theme[] = [
   {
     number: "01",
     title: "EDTECH",
@@ -56,90 +67,132 @@ const themes = [
   },
 ]
 
-export default function ThemesSection() {
+function ThemeCard({
+  theme,
+  index,
+  total,
+  progress,
+}: {
+  theme: Theme
+  index: number
+  total: number
+  progress: MotionValue<number>
+}) {
+  const targetScale = Math.max(0.85, 1 - (total - 1 - index) * 0.045)
+  const scale = useTransform(progress, [index / total, 1], [1, targetScale])
+  const IconComp = theme.icon
+
   return (
-    <section id="tracks" className="relative">
-      <div className="stackWrap">
-        {themes.map((theme, index) => {
-          const IconComp = theme.icon
-          return (
-            <div key={theme.title} className="stackItem" style={{ zIndex: index + 1 }}>
-              <motion.div
-                className="stackCardOuter"
-                style={{ background: `linear-gradient(135deg, ${theme.color}, ${theme.color2})` }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="stackCard">
-                  {index === 0 && (
-                    <div className="stackSectionHeading">
-                      <h2 className="stackSectionTitle">Themes</h2>
-                      <p className="stackSectionSub">Five domains. Pick your battlefield.</p>
-                    </div>
-                  )}
-
-                  <div className="stackHeader">
-                    <span className="stackNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
-                      {theme.number}
-                    </span>
-                    <div className="stackHeaderText">
-                      <h3 className="stackTitle">{theme.title}</h3>
-                      <p className="stackTagline">{theme.tagline}</p>
-                    </div>
-                  </div>
-
-                  <div className="stackBody">
-                    <div className="stackVisual">
-                      <div
-                        className="stackVisualGlow"
-                        style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
-                      />
-                      <IconComp size={110} strokeWidth={1} style={{ color: theme.color }} />
-                    </div>
-
-                    <div className="stackTextCol">
-                      <p className="stackDesc">{theme.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+    <div className="cardSticky" style={{ top: `${96 + index * 44}px`, zIndex: index + 1 }}>
+      <motion.div className="cardOuter" style={{ scale, willChange: "transform" }}>
+        <div
+          className="borderSpin"
+          style={
+            {
+              "--c1": theme.color,
+              "--c2": theme.color2,
+            } as React.CSSProperties
+          }
+        />
+        <div className="cardInner">
+          {index === 0 && (
+            <div className="sectionHeading">
+              <h2 className="sectionTitle">Themes</h2>
+              <p className="sectionSub">Five domains. Pick your battlefield.</p>
             </div>
-          )
-        })}
-      </div>
+          )}
+
+          <div className="cardHeader">
+            <span className="cardNumber" style={{ WebkitTextStrokeColor: `${theme.color}88` }}>
+              {theme.number}
+            </span>
+            <div className="cardHeaderText">
+              <h3 className="cardTitle">{theme.title}</h3>
+              <p className="cardTagline">{theme.tagline}</p>
+            </div>
+          </div>
+
+          <div className="cardBody">
+            <div className="cardVisual">
+              <div
+                className="cardVisualGlow"
+                style={{ background: `radial-gradient(circle, ${theme.color}44, transparent 70%)` }}
+              />
+              <IconComp size={110} strokeWidth={1} style={{ color: theme.color }} />
+            </div>
+
+            <div className="cardTextCol">
+              <p className="cardDesc">{theme.description}</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+export default function ThemesSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
+
+  return (
+    <section
+      id="tracks"
+      ref={containerRef}
+      className="stackSection"
+      style={{ height: `${themes.length * 100}vh` }}
+    >
+      {themes.map((theme, index) => (
+        <ThemeCard key={theme.title} theme={theme} index={index} total={themes.length} progress={scrollYProgress} />
+      ))}
 
       <style jsx>{`
-        .stackWrap {
+        .stackSection {
           position: relative;
         }
 
-        .stackItem {
+        .cardSticky {
           position: sticky;
-          top: 88px;
-          height: calc(100vh - 88px);
+          height: 88vh;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 1.5rem clamp(1rem, 4vw, 3rem) 3rem;
+          padding: 0 clamp(1rem, 4vw, 3rem);
         }
 
-        .stackCardOuter {
+        .cardOuter {
+          position: relative;
           width: 100%;
           max-width: 1500px;
-          height: 100%;
-          margin: 0 auto;
-          padding: 2px;
-          border-radius: 2.5rem;
+          height: 84vh;
+          border-radius: 56px;
+          overflow: hidden;
+          isolation: isolate;
           box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
         }
 
-        .stackCard {
-          position: relative;
-          height: 100%;
+        .borderSpin {
+          position: absolute;
+          inset: -60%;
+          background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c1));
+          animation: spin 7s linear infinite;
+          will-change: transform;
+        }
+
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .cardInner {
+          position: absolute;
+          inset: 3px;
           background: #000;
-          border-radius: calc(2.5rem - 2px);
+          border-radius: 53px;
           padding: clamp(2rem, 4vw, 3.5rem);
           display: flex;
           flex-direction: column;
@@ -147,31 +200,31 @@ export default function ThemesSection() {
           overflow: hidden;
         }
 
-        .stackSectionHeading {
+        .sectionHeading {
           text-align: center;
           margin-bottom: 0.5rem;
         }
 
-        .stackSectionTitle {
+        .sectionTitle {
           font-family: var(--font-heading);
           font-size: clamp(1.75rem, 3vw, 2.5rem);
           font-weight: 700;
           color: white;
         }
 
-        .stackSectionSub {
+        .sectionSub {
           font-size: 1rem;
           color: rgba(255, 255, 255, 0.5);
           margin-top: 0.35rem;
         }
 
-        .stackHeader {
+        .cardHeader {
           display: flex;
           align-items: baseline;
           gap: 1.5rem;
         }
 
-        .stackNumber {
+        .cardNumber {
           font-family: var(--font-heading);
           font-size: clamp(3.5rem, 6vw, 6rem);
           line-height: 0.85;
@@ -180,13 +233,13 @@ export default function ThemesSection() {
           -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35);
         }
 
-        .stackHeaderText {
+        .cardHeaderText {
           display: flex;
           flex-direction: column;
           gap: 0.25rem;
         }
 
-        .stackTitle {
+        .cardTitle {
           font-family: var(--font-heading);
           font-size: clamp(1.5rem, 3.2vw, 2.5rem);
           font-weight: 700;
@@ -194,12 +247,12 @@ export default function ThemesSection() {
           color: white;
         }
 
-        .stackTagline {
+        .cardTagline {
           font-size: 1.05rem;
           color: rgba(255, 255, 255, 0.5);
         }
 
-        .stackBody {
+        .cardBody {
           flex: 1;
           display: grid;
           grid-template-columns: minmax(0, 45%) 1fr;
@@ -208,7 +261,7 @@ export default function ThemesSection() {
           min-height: 0;
         }
 
-        .stackVisual {
+        .cardVisual {
           position: relative;
           height: 100%;
           min-height: 200px;
@@ -221,51 +274,72 @@ export default function ThemesSection() {
           overflow: hidden;
         }
 
-        .stackVisualGlow {
+        .cardVisualGlow {
           position: absolute;
           inset: -20%;
           filter: blur(40px);
         }
 
-        .stackTextCol {
+        .cardTextCol {
           display: flex;
           align-items: center;
         }
 
-        .stackDesc {
+        .cardDesc {
           font-size: clamp(1.1rem, 2vw, 1.6rem);
           line-height: 1.5;
           color: rgba(255, 255, 255, 0.85);
           max-width: 50ch;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+          .borderSpin {
+            animation: none;
+          }
+        }
+
         @media (max-width: 768px) {
-          .stackItem {
+          .stackSection {
+            height: auto !important;
+          }
+
+          .cardSticky {
             position: relative;
-            top: auto;
+            top: auto !important;
             height: auto;
             min-height: 100vh;
             padding: 5.5rem 1rem 2rem;
           }
 
-          .stackCard {
+          .cardOuter {
+            height: auto;
+            min-height: 80vh;
+            border-radius: 32px;
+          }
+
+          .cardInner {
+            position: relative;
+            inset: auto;
+            margin: 3px;
+            width: auto;
+            border-radius: 29px;
             padding: 1.5rem;
             gap: 1.25rem;
           }
 
-          .stackBody {
+          .cardBody {
             grid-template-columns: 1fr;
           }
 
-          .stackVisual {
+          .cardVisual {
             min-height: 160px;
           }
 
-          .stackNumber {
+          .cardNumber {
             font-size: 2.75rem;
           }
 
-          .stackTitle {
+          .cardTitle {
             font-size: 1.4rem;
           }
         }
