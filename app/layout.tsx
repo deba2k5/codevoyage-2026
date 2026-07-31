@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Teko } from "next/font/google";
+import IntroLoader from "./components/IntroLoader";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -25,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${teko.variable} ${outfit.className}`}>
-      <body>{children}</body>
+      <body>
+        <IntroLoader />
+        {children}
+      </body>
     </html>
   );
 }
