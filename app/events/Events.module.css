@@ -171,61 +171,6 @@
   gap: 1rem;
 }
 
-.tracksGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-bottom: 5rem;
-}
-
-.trackCard {
-  background: rgba(22, 25, 38, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 12px;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-}
-
-.trackCard:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-cyan);
-  background: rgba(22, 25, 38, 0.95);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(103, 232, 249, 0.2);
-}
-
-.trackIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: rgba(103, 232, 249, 0.15);
-  border: 1px solid rgba(103, 232, 249, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-  color: var(--accent-cyan);
-}
-
-.trackTitle {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.75rem;
-}
-
-.trackDesc {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  color: #94a3b8;
-  line-height: 1.6;
-  margin: 0;
-}
-
 .prizesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

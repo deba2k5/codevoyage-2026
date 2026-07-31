@@ -2,44 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Brain, Leaf, Shield, Smartphone, Globe, Zap, Medal, Award, ArrowRight } from 'lucide-react';
+import { Trophy, Zap, Medal, Award, ArrowRight } from 'lucide-react';
 import CyberNavbar from '../components/CyberNavbar';
+import ThemesSection from '../components/ThemesSection';
 import styles from './Events.module.css';
 
 export default function EventsPage() {
-  const tracks = [
-    {
-      icon: Brain,
-      title: "AI & Machine Learning",
-      description: "Build intelligent systems using artificial intelligence and machine learning technologies.",
-    },
-    {
-      icon: Shield,
-      title: "Blockchain & Web3",
-      description: "Create decentralized applications and explore the future of blockchain technology.",
-    },
-    {
-      icon: Leaf,
-      title: "Sustainable Tech",
-      description: "Develop solutions that address environmental challenges and promote sustainability.",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Innovation",
-      description: "Design and develop cutting-edge mobile applications for iOS and Android platforms.",
-    },
-    {
-      icon: Globe,
-      title: "Web Technologies",
-      description: "Build modern web applications using the latest frameworks and technologies.",
-    },
-    {
-      icon: Zap,
-      title: "Open Innovation",
-      description: "Think outside the box and create solutions for any problem you're passionate about.",
-    },
-  ];
-
   const prizes = [
     {
       icon: Trophy,
@@ -110,7 +78,7 @@ export default function EventsPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className={styles.statCard}>
-              <div className={styles.statVal}>09</div>
+              <div className={styles.statVal}>08</div>
               <div className={styles.statLabel}>Hours of Coding</div>
             </div>
             <div className={styles.statCard}>
@@ -137,37 +105,12 @@ export default function EventsPage() {
               href="#tracks"
               className={styles.secondaryCta}
             >
-              Explore Tracks
+              Explore Themes
             </a>
           </motion.div>
         </div>
 
-        <section id="tracks">
-          <h2 className={styles.sectionTitle}>
-            <Zap size={32} /> Hackathon Tracks
-          </h2>
-          <div className={styles.tracksGrid}>
-            {tracks.map((track, index) => {
-              const IconComp = track.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className={styles.trackCard}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className={styles.trackIcon}>
-                    <IconComp size={28} />
-                  </div>
-                  <h3 className={styles.trackTitle}>{track.title}</h3>
-                  <p className={styles.trackDesc}>{track.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
+        <ThemesSection />
 
         <section id="prizes">
           <h2 className={styles.sectionTitle} style={{ color: 'var(--accent-yellow)' }}>
