@@ -183,3 +183,27 @@
     font-size: 3.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 1.5rem 1rem;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+  .faqQ {
+    padding: 1rem;
+    font-size: 1rem;
+    gap: 1rem;
+  }
+  .faqA {
+    padding: 0 1rem 1rem;
+    font-size: 0.9rem;
+  }
+}

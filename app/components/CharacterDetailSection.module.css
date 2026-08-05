@@ -197,3 +197,32 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.85rem;
+    margin-bottom: 2rem;
+  }
+  .characterImageWrapper {
+    width: 180px;
+    height: 250px;
+  }
+  .characterName {
+    font-size: 1.6rem;
+  }
+  .synergyBox {
+    padding: 1.5rem 1.1rem;
+  }
+  .synergyText {
+    font-size: 1rem;
+  }
+  .card {
+    padding: 1.25rem;
+  }
+  .cardTitle {
+    font-size: 1.4rem;
+  }
+}

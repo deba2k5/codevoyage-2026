@@ -75,7 +75,7 @@ export default function CyberNavbar() {
         ))}
 
         <a
-          href="https://forms.gle/YOUR_FORM_ID"
+          href="https://luma.com/x5z33nz5"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.navButton}
