@@ -43,13 +43,15 @@ export default function IntroLoader() {
       <video
         ref={videoRef}
         className="introVideo"
-        src="/intro-loader.mp4"
         autoPlay
         muted
         playsInline
         onEnded={finish}
         onError={finish}
-      />
+      >
+        <source src="/intro-loader-desktop.mp4" media="(min-width: 769px)" />
+        <source src="/intro-loader-mobile.mp4" media="(max-width: 768px)" />
+      </video>
 
       <style jsx>{`
         .introLoader {
